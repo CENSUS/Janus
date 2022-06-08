@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# PEP 582; used by e.g. github.com/David-OConnor/pyflow
+__pypackages__/
+
+# Environments
+#.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# vscode settings
+.vscode/
+
+# ssl cerificates
+.certs/
+*.key
+*.pem
+*.crt
+*.csr.cnf
+*.csr
+*.srl
+*.ext
+
+# node_modules
+node_modules/
+
+# rsa keys
+*.key
+*.key.pub
+
+# databases
+*.db
+
+# yaml files
+#*.yaml
+
+#
+
+debug_logs/
+*.log
