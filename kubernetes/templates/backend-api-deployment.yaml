@@ -1,0 +1,144 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-api
+spec:
+  type: NodePort
+  selector:
+    app: backend-api
+    tier: backend
+  ports:
+    - protocol: TCP
+      name: web
+      port: 4220
+      targetPort: 4220
+    # - protocol: TCP
+    #   name: web-secure
+    #   port: 4220
+    #   targetPort: 4220
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-api
+      tier: backend
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: backend-api
+        tier: backend
+    spec:
+      # initContainers:
+      #   - name: ssl-init
+      #     image: busybox
+      #     command:
+      #       - sh
+      #       - -c
+      #       - "mkdir -p /usr/src/app/etc/ssl && cp -r /etc/ssl /usr/src/app/etc"
+      #     volumeMounts:
+      #       - name: tls-config
+      #         mountPath: /etc/ssl
+      containers:
+        - image: backend_api
+          imagePullPolicy: Never
+          name: main
+          ports:
+            - name: web
+              containerPort: 4220
+            # - name: web-secure
+            #   containerPort: 4220
+          env:
+            - name: attikon_hospital_peer0_fabric_config
+              valueFrom:
+                configMapKeyRef:
+                  name: app-fabric-attikon-hospital-peer0-v1-map-backend
+                  key: attikon-hospital-peer0_fabric_data.json
+            - name: general_hospital_of_athens_peer0_fabric_config
+              valueFrom:
+                configMapKeyRef:
+                  name: app-fabric-general-hospital-of-athens-peer0-v1-map-backend
+                  key: general-hospital-of-athens-peer0_fabric_data.json
+            - name: medutils_peer0_fabric_config
+              valueFrom:
+                configMapKeyRef:
+                  name: app-fabric-medutils-peer0-v1-map-backend
+                  key: medutils-peer0_fabric_data.json
+            - name: healthprods_peer0_fabric_config
+              valueFrom:
+                configMapKeyRef:
+                  name: app-fabric-healthprods-peer0-v1-map-backend
+                  key: healthprods-peer0_fabric_data.json
+          volumeMounts:
+            - name: fabric-peers
+              mountPath: /fabric/application/peers
+            - name: fabricids
+              mountPath: /fabric/application/wallet
+            - name: fabric-ccp
+              mountPath: /fabric/application/gateways
+            - name: tlscerts-attikon-hospital
+              mountPath: /fabric/tlscacerts/attikon-hospital
+            - name: tlscerts-general-hospital-of-athens
+              mountPath: /fabric/tlscacerts/general-hospital-of-athens
+            - name: tlscerts-medutils
+              mountPath: /fabric/tlscacerts/medutils
+            - name: tlscerts-healthprods
+              mountPath: /fabric/tlscacerts/healthprods
+            - name: tls-config
+              mountPath: /application/etc/ssl
+              readOnly: true
+            - name: rabbitmq-queues-config
+              mountPath: "/rabbitmq"
+              readOnly: true
+            - name: rabbitmq-settings
+              mountPath: "/rabbitmq-settings"
+              readOnly: true
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: fabric-peers
+          configMap:
+            name: app-fabric-peers-backend-v1-map
+        - name: fabric-ccp
+          configMap:
+            name: app-fabric-ccp-backend-v1-map
+        - name: fabricids
+          configMap:
+            name: app-fabric-ids-backend-v1-map
+        - name: tlscerts-attikon-hospital
+          configMap:
+            name: app-fabric-tls-attikon-hospital-backend-v1-map
+        - name: tlscerts-general-hospital-of-athens
+          configMap:
+            name: app-fabric-tls-general-hospital-of-athens-backend-v1-map
+        - name: tlscerts-medutils
+          configMap:
+            name: app-fabric-tls-medutils-backend-v1-map
+        - name: tlscerts-healthprods
+          configMap:
+            name: app-fabric-tls-healthprods-backend-v1-map
+        - name: tls-config
+          secret:
+            secretName: backend-api-tls
+            items:
+              - key: ca.crt
+                path: ca.crt
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+        - name: rabbitmq-queues-config
+          configMap:
+            name: rabbitmq-queues-config
+            items:
+              - key: "proxy-config.json"
+                path: "proxy-config.json"
+        - name: rabbitmq-settings
+          configMap:
+            name: app-rabbitmq-settings-backend-api-v1-map

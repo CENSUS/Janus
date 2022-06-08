@@ -1,0 +1,45 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rabbitmq-queues-config
+data:
+  proxy-config.json: |-
+    {
+      "TICKETS_QUEUE_EVALUATE": {
+        "BLOCKCHAIN": "PROXY", 
+        "QUEUE_NAME": "TICKETS_QUEUE_EVALUATE",
+        "MAX_CONCURRENT_CLIENTS": 2000,
+        "DURABLE": false
+      },
+      "TICKETS_QUEUE_SUBMIT":  {
+        "BLOCKCHAIN": "PROXY", 
+        "QUEUE_NAME": "TICKETS_QUEUE_SUBMIT",
+        "MAX_CONCURRENT_CLIENTS": 200,
+        "DURABLE": false
+      }
+    }
+  interbc-config.json: |-
+    {
+      "PROXY": {
+        "BLOCKCHAIN": "PROXY", 
+        "QUEUE_NAME": "PROXY",
+        "AFFECTED_BY": "TICKETS_QUEUE_SUBMIT",
+        "MAX_CONCURRENT_CLIENTS": 200,
+        "SHOULD_SUPERVISE": true,
+        "DURABLE": true
+      },
+      "MEDICAL": {
+        "BLOCKCHAIN": "MEDICAL", 
+        "QUEUE_NAME": "MEDICAL",
+        "MAX_CONCURRENT_CLIENTS": 200,
+        "SHOULD_SUPERVISE": false,
+        "DURABLE": true
+      },
+      "MANUFACTURER": {
+        "BLOCKCHAIN": "MANUFACTURER", 
+        "QUEUE_NAME": "MANUFACTURER",
+        "MAX_CONCURRENT_CLIENTS": 200,
+        "SHOULD_SUPERVISE": false,
+        "DURABLE": true
+      }
+    }

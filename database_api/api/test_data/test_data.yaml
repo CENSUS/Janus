@@ -1,0 +1,1035 @@
+##############################################################################
+##############################################################################
+# Using anchors:
+#     create anchor:
+#         field: &anchor_name value
+#     use anchor:
+#         other_field: *anchor_name
+#     These two fields will now have the same value
+#
+# Dates:
+#     field: "YYYY-MM-DD"
+# Datetime:
+#     field: "YYYY-MM-DD HH:MM"
+# This way they can parsed automatically by python
+##############################################################################
+##############################################################################
+
+##############################################################################
+# Hospital Data
+##############################################################################
+
+#stakeholders:
+attikon-hospital:
+  type: "medical"
+  uuid: "dffc7f9a-851c-4714-a8ca-f0ebfee1e434"
+  name: "attikon-hospital"
+  logo_url: "/tmp/attikon-hospital_logo.png"
+
+  clinics:
+    clinic_0:
+      uuid: &clinic_0 "4181f798-3579-4b94-908e-71aac9dde0d0"
+      name: "Plainsboro Hospital"
+      address: "address for clinic_0"
+    clinic_1:
+      uuid: &clinic_1 "49507389-7457-4e8b-a5ec-d5fe7f563ac6"
+      name: "Sacred Heart Hospital"
+      address: "address for clinic_1"
+
+  doctors:
+    # clinic_0
+    doctor_00:
+      guid: &doctor_00 "141debdc-cf00-417c-a7b9-b56268a984bc"
+      firstname: "gregory"
+      surname: "house"
+      specialty: "diagnostician"
+    doctor_01:
+      guid: &doctor_01 "b34c611a-9970-4ace-9591-5d32246bb9dd"
+      firstname: "james"
+      surname: "wilson"
+      specialty: "oncologist"
+    doctor_02:
+      guid: &doctor_02 "10b7b1ca-e993-4dc7-ae74-be54799deef5"
+      firstname: "lisa"
+      surname: "caddy"
+      specialty: "endocrinologist"
+    # clinic_1
+    doctor_10:
+      guid: &doctor_10 "2269163b-a2cd-40b0-bf86-5c2b8047b37a"
+      firstname: "john"
+      surname: "dorian"
+      specialty: "internal medicine"
+    doctor_11:
+      guid: &doctor_11 "99319c9d-6dda-4cd2-9803-5b9a310cdb77"
+      firstname: "christopher"
+      surname: "turk"
+      specialty: "surgeon"
+
+  doctor_contracts:
+    # clinic 0
+    contract_00:
+      uuid: &contract_00 "d527065f-55b1-4cc8-b516-270dc77e5bfc"
+      doctor_guid: *doctor_00
+      start_date: "1998-10-5"
+      end_date:
+      clinic_stationed_uuid: *clinic_0
+    contract_01:
+      uuid: &contract_01 "10a3ebe7-131a-42ac-9c04-e2507fea4c86"
+      doctor_guid: *doctor_01
+      start_date: "2019-08-24"
+      end_date:
+      clinic_stationed_uuid: *clinic_0
+    contract_02:
+      uuid: &contract_02 "25fc14ae-3263-4f26-8b9a-df1337bda384"
+      doctor_guid: *doctor_02
+      start_date: "2019-02-14"
+      end_date:
+      clinic_stationed_uuid: *clinic_0
+    contract_00_1:
+      uuid: &contract_00_1 "75a7065f-55b1-4cc8-b516-270dc77ec432"
+      doctor_guid: *doctor_00
+      start_date: "1998-10-5"
+      end_date:
+      role: "Researcher"
+    # clinic 1
+    contract_10:
+      uuid: &contract_10 "e2198349-03f0-4895-abff-d6fe70979aa2"
+      doctor_guid: *doctor_10
+      start_date: "2018-01-31"
+      end_date:
+      clinic_stationed_uuid: *clinic_1
+    contract_11:
+      uuid: &contract_11 "8ced25f2-40c7-4421-b1ef-39c6ee27b35f"
+      doctor_guid: *doctor_11
+      start_date: "2016-08-31"
+      end_date:
+      clinic_stationed_uuid: *clinic_1
+
+  er_duty:
+    # clinic 0
+    er_00:
+      id: 0
+      start_time: "2020-01-03 16:40"
+      end_time: "2020-01-04 00:40"
+      doctor_contract_uuid: *contract_00
+    er_01:
+      id: 1
+      start_time: "2016-06-19 07:12"
+      end_time: "2016-06-19 15:12"
+      doctor_contract_uuid: *contract_00
+    er_02:
+      id: 2
+      start_time: "2017-09-27 22:01"
+      end_time: "2017-09-28 06:01"
+      doctor_contract_uuid: *contract_01
+    er_03:
+      id: 3
+      start_time: "2017-09-23 10:56"
+      end_time: "2017-09-23 18:56"
+      doctor_contract_uuid: *contract_01
+    er_04:
+      id: 4
+      start_time: "2018-01-19 17:34"
+      end_time: "2018-01-20 01:34"
+      doctor_contract_uuid: *contract_02
+    er_05:
+      id: 5
+      start_time: "2018-05-30 21:19"
+      end_time: "2018-05-31 04:19"
+      doctor_contract_uuid: *contract_02
+    # clinic 1
+    er_10:
+      id: 6
+      start_time: "2020-02-07 19:22"
+      end_time: "2020-02-08 03:22"
+      doctor_contract_uuid: *contract_10
+    er_11:
+      id: 7
+      start_time: "2017-08-15 15:00"
+      end_time: "2017-08-15 23:00"
+      doctor_contract_uuid: *contract_10
+    er_12:
+      id: 8
+      start_time: "2017-07-28 04:19"
+      end_time: "2017-07-28 12:19"
+      doctor_contract_uuid: *contract_10
+    er_13:
+      id: 9
+      start_time: "2019-04-11 06:42"
+      end_time: "2019-04-11 14:42"
+      doctor_contract_uuid: *contract_11
+    er_14:
+      id: 10
+      start_time: "2020-05-11 22:15"
+      end_time: "2020-05-10 06:15"
+      doctor_contract_uuid: *contract_11
+    er_15:
+      id: 11
+      start_time: "2020-02-06 06:59"
+      end_time: "2020-02-06 14:59"
+      doctor_contract_uuid: *contract_11
+
+  patients:
+    # clinic_0
+    patient_00:
+      uuid: &patient_00 "d39d3d4f-1c39-48dc-82a3-a89ddb5d2f72"
+      SSN: "SSN_00"
+      firstname: "anna"
+      surname: "leighton"
+      weight: "52"
+      address: "address_00"
+      date_of_birth: "1984-05-04"
+    patient_01:
+      uuid: &patient_01 "db1091cf-4884-4002-9db2-754761c1f14f"
+      SSN: "SSN_01"
+      firstname: "chi"
+      surname: "ling"
+      weight: "64"
+      address: "address_01"
+      date_of_birth: "1981-01-29"
+    patient_02:
+      uuid: &patient_02 "56fa3ecb-e8d6-4975-92f6-6bb5ab7974ed"
+      SSN: "SSN_common"
+      firstname: "ex"
+      surname: "ray"
+      weight: "57"
+      address: "address_common"
+      date_of_birth: "1993-11-12"
+    # clinic_1
+    patient_10:
+      uuid: &patient_10 "0cba7673-5157-43b0-baf9-110774431020"
+      SSN: "SSN_10"
+      firstname: "mike"
+      surname: "davies"
+      weight: "78"
+      address: "address_10"
+      date_of_birth: "1976-03-07"
+    patient_11:
+      uuid: &patient_11 "fbe11d8f-a925-4aad-a7ff-c2d965690e02"
+      SSN: "SSN_11"
+      firstname: "tom"
+      surname: "halford"
+      weight: "72"
+      address: "address_11"
+      date_of_birth: "1988-08-18"
+    patient_12:
+      uuid: &patient_12 "56fa3ecb-e8d6-4975-92f6-6bb5ab7974ed"
+      SSN: "SSN_common"
+      firstname: "ex"
+      surname: "ray"
+      weight: "57"
+      address: "address_common"
+      date_of_birth: "1993-11-12"
+
+  treatments:
+    # clinic 0
+    treatment_00:
+      uuid: &treatment_00 "6844f5e0-56af-4760-a919-561373486aeb"
+      patient_uuid: *patient_00
+      start_date: "2020-03-04"
+      last_update_date: "2020-03-14"
+      end_date: "2020-03-14"
+      description: "treatment of patient_00 in clinic_0"
+      status: "status_00"
+      clinic_uuid: *clinic_0
+    treatment_01:
+      uuid: &treatment_01 "868d1954-19f8-452d-bb4e-bef80f07367a"
+      patient_uuid: *patient_01
+      start_date: "2020-01-03"
+      last_update_date: "2020-01-13"
+      end_date: "2020-01-13"
+      description: "treatment of patient_01 in clinic_0"
+      status: "status_01"
+      clinic_uuid: *clinic_0
+    treatment_02:
+      uuid: &treatment_02 "fa9fc3c2-c86e-4120-bec8-a93bdcfab053"
+      patient_uuid: *patient_02
+      start_date: "2020-08-29"
+      last_update_date: "2020-09-12"
+      end_date: "2020-09-12"
+      description: "treatment of patient_02 in clinic_0"
+      status: "status_02"
+      clinic_uuid: *clinic_0
+    treatment_03:
+      uuid: &treatment_03 "3deebea4-c75f-4278-b1b3-c3f23611255f"
+      patient_uuid: *patient_00
+      start_date: "2020-03-14"
+      last_update_date: "2020-04-02"
+      end_date: "2020-04-02"
+      description: "second treatment of patient_00 in clinic_0"
+      status: "status_03"
+      clinic_uuid: *clinic_0
+    # clinic 1
+    treatment_10:
+      uuid: &treatment_10 "680a2310-f316-4f5e-8735-f794dd3063d2"
+      patient_uuid: *patient_10
+      start_date: "2020-05-24"
+      last_update_date: "2020-06-13"
+      end_date: "2020-06-13"
+      description: "treatment of patient_10 in clinic_1"
+      status: "status_10"
+      clinic_uuid: *clinic_1
+    treatment_11:
+      uuid: &treatment_11 "ed3be56a-bd7a-49ab-90b4-706ed366fa1b"
+      patient_uuid: *patient_10
+      start_date: "2020-08-09"
+      last_update_date: "2020-08-20"
+      end_date: "2020-08-20"
+      description: "second treatment of patient_10 in clinic_1"
+      status: "status_11"
+      clinic_uuid: *clinic_1
+    treatment_12:
+      uuid: &treatment_12 "010c4bef-23e5-4798-a7b6-ef2264885cc5"
+      patient_uuid: *patient_11
+      start_date: "2020-09-14"
+      last_update_date: "2020-09-14"
+      description: "treatment of patient_11 in clinic_1"
+      status: "status_12"
+      clinic_uuid: *clinic_1
+    treatment_13:
+      uuid: &treatment_13 "55991e64-c810-4cd7-8baa-9b0eabdea5bf"
+      patient_uuid: *patient_12
+      start_date: "2020-09-18"
+      last_update_date: "2020-09-18"
+      description: "treatment of patient_12 in clinic_1"
+      status: "status_13"
+      clinic_uuid: *clinic_1
+
+  prescriptions:
+    # clinic 0
+    prescription_00:
+      uuid: "29950d30-8533-49bb-9cb5-a51daf824f25"
+      treatment_uuid: *treatment_00
+      doctor_contract_uuid: *contract_00
+      entry_time: "2020-03-04 12:33"
+      prescription_path: "/tmp/prescription_00.txt"
+    prescription_01:
+      uuid: "7f822238-ce48-4426-b0f0-7de88363ff62"
+      treatment_uuid: *treatment_01
+      doctor_contract_uuid: *contract_01
+      entry_time: "2020-01-03 18:19"
+      prescription_path: "/tmp/prescription_01.txt"
+    prescription_02:
+      uuid: "d4c78878-5957-4fe4-94d6-0eb7bfeb9d24"
+      treatment_uuid: *treatment_02
+      doctor_contract_uuid: *contract_02
+      entry_time: "2020-08-29 22:48"
+      prescription_path: "/tmp/prescription_02.txt"
+    prescription_03:
+      uuid: "e01f7e14-fe3a-4698-a0ae-c89fcc3b5b95"
+      treatment_uuid: *treatment_03
+      doctor_contract_uuid: *contract_00
+      entry_time: "2020-03-14 08:27"
+      prescription_path: "/tmp/prescription_03.txt"
+    # clinic 1
+    prescription_10:
+      uuid: "8039fd96-8ea8-4605-b6f1-73d3e6a89f99"
+      treatment_uuid: *treatment_10
+      doctor_contract_uuid: *contract_10
+      entry_time: "2020-05-24 05:52"
+      prescription_path: "/tmp/prescription_10.txt"
+    prescription_11:
+      uuid: "07954e16-d9f2-4a9e-a350-1473f69866d1"
+      treatment_uuid: *treatment_11
+      doctor_contract_uuid: *contract_11
+      entry_time: "2020-08-20 13:41"
+      prescription_path: "/tmp/prescription_11.txt"
+    prescription_12:
+      uuid: "58d631cb-44c2-43d7-a5d4-898eb8dd68d2"
+      treatment_uuid: *treatment_13
+      doctor_contract_uuid: *contract_10
+      entry_time: "2020-01-19 21:28"
+      prescription_path: "/tmp/prescription_12.txt"
+
+  diseases:
+    disease_00:
+      uuid: &disease_00 "fbdc32fd-47ae-467f-ad61-29144de20402"
+      name: "allergy"
+      description: "allergies are an immune response triggered by allergens, an ordinarily harmful substance."
+      symptoms: "eye irritation, runny nose, stuffy nose, puffy-watery eyes, sneezing, inflamed, itchy nose and throat"
+    disease_01:
+      uuid: &disease_01 "0665d650-5608-4642-b63d-2c21300691aa"
+      name: "conjunctivitis (pink eye)"
+      description: "an inflammation of the transparent membrane (conjunctiva) that lines your eyelids and part of your eyeballs"
+      symptoms: "redness, itching, tearing, burning sensation, pus-like discharge and/or crusting of the eyelids"
+    disease_02:
+      uuid: &disease_02 "c8c8424b-8e38-4c99-aea8-c37fc194e17d"
+      name: "mononucleosis"
+      description: "mononucleosis is an illness caused by the epstein-barr virus (ebv), which is spread through saliva"
+      symptoms: "extreme fatigue, swollen lymph glands and spleen, sore throat, fever, loss of appetite, muscle aches"
+    disease_03:
+      uuid: &disease_03 "ff05a670-d378-458e-bd91-170199ef58a8"
+      name: "coronavirus (covid-19)"
+      description: "coronaviruses are a large family of viruses which may cause illness in animals or humans"
+      symptoms: "ever, cough and difficulty breathing"
+    disease_04:
+      uuid: &disease_04 "252b74e1-61e3-42a5-a1bf-88c6ef1a7b29"
+      name: "asthma"
+      description: "a disease that affects your lungs"
+      symptoms: "repeated episodes of wheezing, breathleSSNess, chest tightness, and nighttime or early morning coughing."
+    disease_05:
+      uuid: &disease_05 "ab22fc3b-eb24-444c-8691-e968cf860d4a"
+      name: "gonorrhea"
+      description: "gonorrhea is a sexually transmitted disease (std) that can infect both men and women"
+      symptoms: "infections in the genitals, rectum, and throat"
+    disease_06:
+      uuid: &disease_06 "acfbc991-578d-4e65-8931-ca7cff0bf4e5"
+      name: "zika virus"
+      description: "zika is spread mostly by the bite of an infected aedes species mosquito"
+      symptoms: "fever, rash, headache, joint pain, red eyes, muscle pain"
+
+  diagnoses:
+    # clinic 0
+    diagnosis_00:
+      uuid: &diagnosis_00 "e70b0dbc-46fe-40bf-a76a-708e0faf2ce9"
+      treatment_uuid: *treatment_00
+      doctor_contract_uuid: *contract_01
+      entry_time: "2020-03-05 12:23"
+      diagnosis_data: "diagnosis for treatment_00 in clinic_0"
+      disease_uuid: *disease_00
+    diagnosis_01:
+      uuid: &diagnosis_01 "3d8aea31-74e8-412f-be1e-95e2cbe6f981"
+      treatment_uuid: *treatment_01
+      doctor_contract_uuid: *contract_00
+      entry_time: "2020-01-15 15:34"
+      diagnosis_data: "diagnosis for treatment_01 in clinic_0"
+      disease_uuid: *disease_01
+    diagnosis_02:
+      uuid: &diagnosis_02 "cf721b7c-19a2-4181-ab3d-7cd0e05ec037"
+      treatment_uuid: *treatment_02
+      doctor_contract_uuid: *contract_02
+      entry_time: "2020-09-13 18:40"
+      diagnosis_data: "diagnosis for treatment_02 in clinic_0"
+      disease_uuid: *disease_02
+    diagnosis_03:
+      uuid: &diagnosis_03 "f43b04cd-1cc1-46ce-ab78-d293aed907a4"
+      treatment_uuid: *treatment_03
+      doctor_contract_uuid: *contract_00
+      entry_time: "2020-03-16 08:10"
+      diagnosis_data: "diagnosis for treatment_03 in clinic_0"
+      disease_uuid: *disease_03
+    # clinic 1
+    diagnosis_10:
+      uuid: &diagnosis_10 "5154940e-ab71-4441-ae23-732e636f85d7"
+      treatment_uuid: *treatment_10
+      doctor_contract_uuid: *contract_10
+      entry_time: "2020-08-22 22:48"
+      diagnosis_data: "diagnosis for treatment_10 in clinic_1"
+      disease_uuid: *disease_04
+    diagnosis_11:
+      uuid: &diagnosis_11 "b6498522-1f8a-4d86-b84d-64c0709234a8"
+      treatment_uuid: *treatment_11
+      doctor_contract_uuid: *contract_10
+      entry_time: "2020-08-10 17:34"
+      diagnosis_data: "diagnosis for treatment_11 in clinic_1"
+      disease_uuid: *disease_05
+    diagnosis_12:
+      uuid: &diagnosis_12 "85476049-9510-4189-8e58-8181c9d7896e"
+      treatment_uuid: *treatment_12
+      doctor_contract_uuid: *contract_11
+      entry_time: "2020-09-16 07:24"
+      diagnosis_data: "diagnosis for treatment_13 in clinic_1"
+      disease_uuid: *disease_00
+    diagnosis_13:
+      uuid: &diagnosis_13 "ceb9baec-e7db-4fa3-a40e-821145058ec1"
+      treatment_uuid: *treatment_13
+      doctor_contract_uuid: *contract_11
+      entry_time: "2020-09-18 15:18"
+      diagnosis_data: "diagnosis for treatment_13 in clinic_1"
+      disease_uuid: *disease_01
+
+  diagnostic_tests_data:
+    # clinic 0
+    diagnostic_test_data_00:
+      uuid: "303838aa-ad8f-4065-9b9b-07f949c81963"
+      test_type: "treatment_00 test"
+      entry_time: "2020-03-05 10:12"
+      test_data: "test_00 data"
+      diagnosis_uuid:
+    diagnostic_test_data_01:
+      uuid: "3a5e367a-0398-48ac-9292-4f465cb4a259"
+      test_type: "treatment_01 test"
+      entry_time: "2020-01-14 22:47"
+      test_data: "test_01 data"
+      diagnosis_uuid: *diagnosis_00
+    diagnostic_test_data_02:
+      uuid: "8c22964f-82ef-48c3-809c-d8c4e386071f"
+      test_type: "treatment_02 test"
+      treatment_uuid: *treatment_02
+      entry_time: "2020-09-13 09:18"
+      test_data: "test_02 data"
+      diagnosis_uuid:
+    diagnostic_test_data_03:
+      uuid: "89ab7765-68c1-4b6e-9fc1-574f7e109375"
+      test_type: "treatment_03 test"
+      entry_time: "2020-03-15 17:39"
+      test_data: "test_03 data"
+      diagnosis_uuid: *diagnosis_02
+    # clinic 1
+    diagnostic_test_data_10:
+      uuid: "ad6b173a-5caf-4041-a527-d330d38a93b3"
+      test_type: "treatment_10 test"
+      entry_time: "2020-08-22 09:54"
+      test_data: "test_10 data"
+      diagnosis_uuid:
+    diagnostic_test_data_11:
+      uuid: "80f24740-c6ad-4bfb-be3a-b07b68f699d8"
+      test_type: "treatment_11 test"
+      entry_time: "2020-08-10 07:18"
+      test_data: "test_11 data"
+      diagnosis_uuid: *diagnosis_11
+    diagnostic_test_data_12:
+      uuid: "8f83547c-3f7d-4251-8c57-9bf92b245fac"
+      test_type: "treatment_12 test"
+      entry_time: "2020-09-15 18:57"
+      test_data: "test_12 data"
+      diagnosis_uuid:
+    diagnostic_test_data_13:
+      uuid: "94337953-80c1-4c8d-a552-29aae7822d08"
+      test_type: "treatment_13 test"
+      entry_time: "2020-09-18 06:15"
+      test_data: "test_13 data"
+      diagnosis_uuid: *diagnosis_10
+
+  technicians:
+    technician_00:
+      guid: &technician_00 "4fe6945e-5896-4bb1-89f2-2ee4a90bf6ef"
+      firstname: "colton"
+      surname: "kenedy"
+    technician_01:
+      guid: &technician_01 "b722511c-a35e-4b01-a510-5e889e9e12b5"
+      firstname: "aman"
+      surname: "ratliff"
+
+  technician_contracts:
+    contract_00:
+      uuid: &tech_contract_00 a593ec13-ba5a-4361-bcab-93578bb54b3b
+      technician_guid: *technician_00
+      start_date: "2018-08-08"
+      end_date:
+    contract_01:
+      uuid: &tech_contract_01 518b1504-11e8-4b98-b915-7463fe13c82f
+      technician_guid: *technician_01
+      start_date: "2019-01-10"
+      end_date: "2022-04-26"
+
+  medical_devices:
+    device_00:
+      uuid: &device_00 "c9b28305-f3b1-4e52-a1b1-3d47efd89915"
+      serial: "serial_00"
+      manufacturer: &medutils "medutils"
+      model: "model_00"
+      install_date: "2018-07-18"
+      next_required_maintenance_date: "2021-07-18"
+      last_maintenance_id:
+      clinic_uuid: *clinic_0
+    device_10:
+      uuid: &device_10 "d187fa6a-8afa-4f10-b113-741841abb875"
+      serial: "serial_10"
+      manufacturer: &healthprods "healthprods"
+      model: "model_10"
+      install_date: "2017-07-13"
+      last_maintenance_id:
+      next_required_maintenance_date: "2021-07-13"
+      clinic_uuid: *clinic_0
+
+  maintenances:
+    maintenance_00:
+      id: 0
+      device_uuid: *device_00
+      description: "maintenance of device_00 by technician_00"
+      technician_contract_uuid: *tech_contract_00
+      start_time: "2021-07-18 06:49"
+      end_time: "2021-07-18 12:42"
+    maintenance_02:
+      id: 1
+      device_uuid: *device_10
+      description: "maintenance of device_10 by technician_01"
+      technician_contract_uuid: *tech_contract_01
+      start_time: "2021-07-13 07:41"
+      end_time: "2021-07-13 16:59"
+
+general-hospital-of-athens:
+  type: "medical"
+  uuid: "e3ff844f-b1a0-4e4b-917d-a4327ce6e293"
+  name: "general-hospital-of-athens"
+  logo_url: "/tmp/general-hospital-of-athens_logo.png"
+
+  clinics:
+    clinic_2:
+      uuid: &clinic_2 "1c53abd3-fbaa-4977-9f59-2b8723d485cb"
+      name: "Silver Birch Medical Center"
+      address: "address for clinic_2"
+
+  doctors:
+    # clinic_0
+    doctor_20:
+      guid: &doctor_20 "a51033a3-b4c0-4b87-a902-6d472190682c"
+      firstname: "Baran"
+      surname: "Davidson"
+      specialty: "Anesthesiologist"
+    doctor_21:
+      guid: &doctor_21 "cf4f4bb1-d12a-4df0-97e2-ae0a4cb269e2"
+      firstname: "karam"
+      surname: "Holmes"
+      specialty: "general practice"
+
+  doctor_contracts:
+    contract_20:
+      uuid: &contract_20 "828316a6-8813-40e2-8be3-dd865c40c25e"
+      doctor_guid: *doctor_20
+      start_date: "2018-11-08"
+      end_date: "2022-09-26"
+      clinic_stationed_uuid: *clinic_2
+    contract_21:
+      uuid: &contract_21 "10a3ebe7-131a-42ac-9c04-e2507fea4c86"
+      doctor_guid: *doctor_21
+      start_date: "2018-01-26"
+      end_date: "2022-09-07"
+      clinic_stationed_uuid: *clinic_2
+
+  er_duty:
+    er_00:
+      id: 0
+      start_time: "2022-09-05 03:09"
+      end_time: "2022-09-05 11:09"
+      doctor_contract_uuid: *contract_20
+    er_01:
+      id: 1
+      start_time: "2022-08-18 12:08"
+      end_time: "2022-08-18 20:08"
+      doctor_contract_uuid: *contract_20
+    er_02:
+      id: 2
+      start_time: "2022-08-07 11:08"
+      end_time: "2022-08-07 19:08"
+      doctor_contract_uuid: *contract_21
+    er_03:
+      id: 3
+      start_time: "2022-07-13 11:07"
+      end_time: "2022-07-13 19:07"
+      doctor_contract_uuid: *contract_21
+    er_04:
+      id: 4
+      start_time: "2022-06-24 05:06"
+      end_time: "2022-06-24 13:06"
+      doctor_contract_uuid: *contract_20
+    er_05:
+      id: 5
+      start_time: "2022-04-25 11:04"
+      end_time: "2022-04-25 19:04"
+      doctor_contract_uuid: *contract_21
+
+  patients:
+    patient_20:
+      uuid: &patient_20 "491ae19b-6c5b-4405-8908-8d83b820aa98"
+      SSN: "SSN_20"
+      firstname: "nicola"
+      surname: "martins"
+      weight: "74"
+      address: "address_20"
+      date_of_birth: "1984-07-09"
+    patient_21:
+      uuid: &patient_21 "e2573372-642e-4c87-8d52-9edadd2147c0"
+      SSN: "SSN_21"
+      firstname: "syed"
+      surname: "maddox"
+      weight: "103"
+      address: "address_21"
+      date_of_birth: "1980-04-19"
+    patient_22:
+      uuid: &patient_22 "56fa3ecb-e8d6-4975-92f6-6bb5ab7974ed"
+      SSN: "SSN_common"
+      firstname: "ex"
+      surname: "ray"
+      weight: "57"
+      address: "address_common"
+      date_of_birth: "1993-11-12"
+
+  treatments:
+    treatment_20:
+      uuid: &treatment_20 "9c30728c-eed7-46b5-91e3-01ffd632bc4e"
+      patient_uuid: *patient_20
+      start_date: "2019-01-14"
+      last_update_date: "2019-01-22"
+      description: "treatment of patient_20 in clinic_2"
+      status: "status_20"
+      clinic_uuid: *clinic_2
+    treatment_21:
+      uuid: &treatment_21 "259e1297-8382-45ab-bcb2-c65f5a2ab261"
+      patient_uuid: *patient_21
+      start_date: "2019-04-10"
+      last_update_date: "2019-04-10"
+      description: "treatment of patient_21 in clinic_2"
+      status: "status_21"
+      clinic_uuid: *clinic_2
+    treatment_22:
+      uuid: &treatment_22 "4a7d29ac-4d28-4cf6-bfbc-3922e568c46c"
+      patient_uuid: *patient_20
+      start_date: "2019-08-05"
+      last_update_date: "2019-08-15"
+      description: "second treatment of patient_20 in clinic_2"
+      status: "status_22"
+      clinic_uuid: *clinic_2
+
+  prescriptions:
+    prescription_20:
+      uuid: "f0c116f3-470c-436c-b0a6-1c56af213e97"
+      treatment_uuid: *treatment_20
+      doctor_contract_uuid: *contract_20
+      entry_time: "2019-01-14 09:02"
+      prescription_path: "/tmp/prescription_20.txt"
+    prescription_21:
+      uuid: "1b2b31ae-2c84-453a-ab69-f11faa6463fd"
+      treatment_uuid: *treatment_21
+      doctor_contract_uuid: *contract_21
+      entry_time: "2019-04-10 18:19"
+      prescription_path: "/tmp/prescription_21.txt"
+
+  diseases:
+    disease_20:
+      uuid: &disease_20 "c8513c60-cadb-4789-bd3d-663f1a7e1941"
+      name: "cackle fever"
+      description: "While inn the grips of this disease, victims frequently succumb to fits of mad laughter, giving thte diesease its Common name and morbid nickname: The Shrieks."
+      symptoms: "uncontrollable laughter, exhaustion"
+    disease_21:
+      uuid: &disease_21 "c71d6caa-6c0f-40d9-90fb-e767419e583a"
+      name: "Sewer plague"
+      description: "Sewer plague is a generic term for a broad category of illnesses that incubate in Sewers, refuse heaps, and stagnant swamps, and which are sometimes transmitted by creatures that dwell in those areas, such as rats"
+      symptoms: "fatigue, cramps, exhaustion"
+    disease_22:
+      uuid: &disease_22 "81fb45a5-fde2-4245-ab6f-8f842fabb7db"
+      name: "sight rot"
+      description: "This painful infection causes bleeding from the eyes and eventually blinds the victim."
+      symptoms: "blurry vision, blindness"
+
+  diagnoses:
+    diagnosis_20:
+      uuid: &diagnosis_20 "f6e11161-f60b-4f6e-b5b8-f672f1433398"
+      treatment_uuid: *treatment_20
+      doctor_contract_uuid: *contract_20
+      entry_time: "2019-01-22 12:23"
+      diagnosis_data: "diagnosis for treatment_20 in clinic_2"
+      disease_uuid: *disease_20
+    diagnosis_21:
+      uuid: &diagnosis_21 "ae8899d1-6225-4fc4-a5cc-35b7619d53a3"
+      treatment_uuid: *treatment_21
+      doctor_contract_uuid: *contract_20
+      entry_time: "2019-4-10 15:34"
+      diagnosis_data: "diagnosis for treatment_21 in clinic_2"
+      disease_uuid: *disease_22
+    diagnosis_22:
+      uuid: &diagnosis_22 "2d722d99-56a2-4203-a712-5c279bf85f47"
+      treatment_uuid: *treatment_22
+      doctor_contract_uuid: *contract_21
+      entry_time: "2019-08-15 18:40"
+      diagnosis_data: "diagnosis for treatment_22 in clinic_2"
+      disease_uuid: *disease_21
+
+  diagnostic_tests_data:
+    diagnostic_test_data_20:
+      uuid: "c1f0f8df-69f5-4350-bd40-fba4bb53337b"
+      test_type: "treatment_20 test"
+      entry_time: "2019-01-22 07:22"
+      test_data: "test_20 data"
+      diagnosis_uuid: *diagnosis_20
+    diagnostic_test_data_21:
+      uuid: "b23a383d-17d0-444c-984a-7063a30fdbb3"
+      test_type: "treatment_21 test"
+      entry_time: "2019-04-09 22:47"
+      test_data: "test_21 data"
+      diagnosis_uuid: *diagnosis_21
+    diagnostic_test_data_22:
+      uuid: "72f94423-a261-4712-8c47-b68171d820da"
+      test_type: "treatment_02 test"
+      treatment_uuid: *treatment_22
+      entry_time: "2019-08-15 09:18"
+      test_data: "test_22 data"
+      diagnosis_uuid:
+
+  technicians:
+    technician_00:
+      guid: *technician_00
+      firstname: "colton"
+      surname: "kenedy"
+    technician_01:
+      guid: &technician_21 "aad0dbe1-54bc-4ff5-bef1-730b2bf70bef"
+      firstname: "gurdeep"
+      surname: "hilton"
+
+  technician_contracts:
+    contract_00:
+      uuid: &tech_contract_20 "3b59f2aa-fb39-4b9d-a4fc-2a8a51497e55"
+      technician_guid: *technician_00
+      start_date: "2019-09-18"
+      end_date:
+    contract_01:
+      uuid: &tech_contract_21 "924c3822-d57b-4261-93f7-61cc76ed933c"
+      technician_guid: *technician_21
+      start_date: "2017-01-30"
+      end_date: "2021-04-22"
+
+  medical_devices:
+    device_20:
+      uuid: &device_01 "89fd2960-bfc0-4675-9c2f-108c1520a87a"
+      serial: "serial_01"
+      manufacturer: *medutils
+      model: "model_01"
+      install_date: "2020-06-13"
+      next_required_maintenance_date: "2023-07-18"
+      last_maintenance_id:
+      clinic_uuid: *clinic_2
+    device_21:
+      uuid: &device_11 "ba5c3957-1b1f-4f20-818d-d6f78384378c"
+      serial: "serial_11"
+      manufacturer: *healthprods
+      model: "model_11"
+      install_date: "2018-07-22"
+      last_maintenance_id:
+      next_required_maintenance_date: "2022-07-13"
+      clinic_uuid: *clinic_2
+
+  maintenances:
+    maintenance_20:
+      id: 0
+      device_uuid: *device_01
+      description: "maintenance of device_20 by technician_00"
+      technician_contract_uuid: *tech_contract_20
+      start_time: "2020-03-04 08:03"
+      end_time: "2020-03-04 22:03"
+    maintenance_02:
+      id: 1
+      device_uuid: *device_11
+      description: "maintenance of device_21 by technician_21"
+      technician_contract_uuid: *tech_contract_21
+      start_time: "2020-01-04 09:01"
+      end_time: "2020-01-04 16:01"
+
+##############################################################################
+# manufacturing data
+##############################################################################
+
+medutils:
+  type: "manufacturing"
+  uuid: "34c3fa4c-af9a-4c09-a093-4f66d6ade57a"
+  manufacturers:
+    medutils:
+      uuid: &manufacturer_uuid_0 "34c3fa4c-af9a-4c09-a093-4f66d6ade57a"
+      name: *medutils
+
+  firmware:
+    firmware_00:
+      uuid: &firmware_00 "29afa377-6a49-4016-a74f-4265675b9764"
+      version: 1
+      sha1_hash: "df93dc1648e0049f32117b46c2a29d6c06fcde12"
+      path: "/tmp/firmware_v0_0.out"
+    firmware_01:
+      uuid: &firmware_01 "f3c2c000-20d4-4991-a801-a2538cf2f81b"
+      version: 2
+      sha1_hash: "41920edf6f36e77f5cc9909818bf2481131544f1"
+      path: "/tmp/firmware_v0_1.out"
+
+  device_models:
+    device_model_00:
+      uuid: &device_model_00 "c94c2eff-66ba-4a9b-abc8-b5f3a6a580b0"
+      name: "model_00"
+      device_type: "type 00"
+      shipped_firmware_uuid: *firmware_00
+      latest_firmware_available_uuid: *firmware_01
+    device_model_01:
+      uuid: &device_model_01 "d51091a2-349e-4b79-8b09-1b45614d6837"
+      name: "model_01"
+      device_type: "type 00"
+      shipped_firmware_uuid: *firmware_01
+      latest_firmware_available_uuid: *firmware_01
+
+  devices:
+    device_00:
+      uuid: *device_00
+      device_model_uuid: *device_model_00
+      serial: &serial_00 "serial_00"
+      current_firmware_uuid: *firmware_00
+    device_01:
+      uuid: *device_01
+      serial: &serial_01 "serial_01"
+      device_model_uuid: *device_model_01
+      current_firmware_uuid: *firmware_01
+
+  personnel:
+    person_00:
+      guid: &person_00 63112768-ba65-4a7b-a4b8-739f39d257c2
+      firstname: "percy"
+      surname: "kidd"
+    person_01:
+      guid: &person_01 20204e7f-b36d-4793-b47c-cf7383993fa4
+      firstname: "elise"
+      surname: "padilla"
+
+  personnel_contracts:
+    contract_00:
+      uuid: a593ec13-ba5a-4361-bcab-93578bb54b3b
+      personnel_guid: *person_00
+      start_date: "2019-10-09"
+      end_date: "2020-06-23"
+    contract_01:
+      uuid: 518b1504-11e8-4b98-b915-7463fe13c82f
+      personnel_guid: *person_01
+      start_date: "2019-07-31"
+      end_date:
+
+  technicians:
+    technician_00:
+      guid: *technician_00
+      firstname: "colton"
+      surname: "kenedy"
+    technician_21:
+      guid: &technician_31 3b066366-c857-4222-a2b4-e753936e4d74
+      firstname: "shah"
+      surname: "north"
+
+  technician_contracts:
+    contract_00:
+      uuid: a593ec13-ba5a-4361-bcab-93578bb54b3b
+      technician_guid: *technician_00
+      start_date: "2018-05-29"
+      end_date: "2019-06-26"
+    contract_01:
+      uuid: 518b1504-11e8-4b98-b915-7463fe13c82f
+      technician_guid: *technician_31
+      start_date: "2020-06-23"
+      end_date:
+    contract_02:
+      uuid: 8047eba1-27e6-44af-895c-a6a648ee23cc
+      technician_guid: *technician_00
+      start_date: "2020-08-06"
+      end_date:
+
+  incidents:
+    incident_00:
+      id: 0
+      time: "2020-02-01 02:02"
+      device_serial: *serial_00
+      description: "description for incident_00"
+      report_path: "/tmp/report_00.txt"
+    incident_01:
+      id: 1
+      time: "2019-12-29 10:12"
+      device_serial: *serial_01
+      description: "description for incident_01"
+      report_path: "/tmp/report_01.txt"
+    incident_02:
+      id: 2
+      time: "2019-03-13 08:03"
+      device_serial: *serial_01
+      description: "description for incident_02"
+      report_path: "/tmp/report_02.txt"
+
+healthprods:
+  type: "manufacturing"
+  uuid: "13fcaf07-fdf8-409b-8a9c-52e1acf4360f"
+  manufacturers:
+    healthprods:
+      uuid: &manufacturer_uuid_1 "13fcaf07-fdf8-409b-8a9c-52e1acf4360f"
+      name: *healthprods
+
+  firmware:
+    firmware_10:
+      uuid: &firmware_10 "b61c1e90-8ccf-4979-b5f5-b9d7a8eb21fc"
+      version: 1
+      sha1_hash: "0d6c64f57b83a2b67c415c56923e544bb29ab9f0"
+      path: "/tmp/firmware_v1_0.out"
+    firmware_11:
+      uuid: &firmware_11 "e579535f-4ee0-4d4c-aea2-55ac5da8b776"
+      version: 2
+      sha1_hash: "8f68a139d990529e36a396922dd52ab19cb4973e"
+      path: "/tmp/firmware_v1_1.out"
+
+  device_models:
+    device_model_10:
+      uuid: &device_model_10 "de67c119-f3e5-4d36-8ada-0e6c11d0a777"
+      name: "model_10"
+      device_type: "type 10"
+      shipped_firmware_uuid: *firmware_10
+      latest_firmware_available_uuid: *firmware_11
+    device_model_11:
+      uuid: &device_model_11 "eee2594d-bef5-4843-ba1e-f03364fbddcb"
+      name: "model_11"
+      device_type: "type 11"
+      shipped_firmware_uuid: *firmware_11
+      latest_firmware_available_uuid: *firmware_11
+
+  devices:
+    device_10:
+      uuid: *device_10
+      serial: &serial_10 "serial_10"
+      device_model_uuid: *device_model_10
+      current_firmware_uuid: *firmware_10
+    device_11:
+      uuid: *device_11
+      serial: &serial_11 "serial_11"
+      device_model_uuid: *device_model_11
+      current_firmware_uuid: *firmware_11
+
+  personnel:
+    person_00:
+      guid: &person_20 2b32e00b-2fe6-4e77-a16a-1a1582f889bb
+      firstname: "willis"
+      surname: "francis"
+    person_01:
+      guid: &person_21 88f2b394-0017-4c47-aecf-53761c66ae02
+      firstname: "shanaya"
+      surname: "cardenas"
+
+  personnel_contracts:
+    contract_00:
+      uuid: 3b066366-c857-4222-a2b4-e753936e4d74
+      personnel_guid: *person_20
+      start_date: "2018-02-13"
+      end_date: "2020-12-02"
+    contract_01:
+      uuid: 20204e7f-b36d-4793-b47c-cf7383993fa4
+      personnel_guid: *person_21
+      start_date: "2018-05-21"
+      end_date: "2020-09-29"
+
+  technicians:
+    technician_00:
+      guid: &technician_41 16746338-5570-477a-b05b-8664a1c7cce3
+      firstname: "roman"
+      surname: "barker"
+    technician_21:
+      guid: *technician_21
+      firstname: "shah"
+      surname: "north"
+
+  technician_contracts:
+    contract_00:
+      uuid: 6faa3472-b2ca-4bc2-b8a2-c03f9b747720
+      technician_guid: *technician_41
+      start_date: "2018-11-28"
+      end_date: "2020-09-24"
+    contract_01:
+      uuid: 32c3dad9-b9c8-4ed1-817f-4c355783dbd4
+      technician_guid: *technician_21
+      start_date: "2020-08-17"
+      end_date:
+
+  incidents:
+    incident_10:
+      id: 3
+      time: "2019-08-12 12:08"
+      device_serial: *serial_10
+      description: "description for incident_00"
+      report_path: "/tmp/report_10.txt"
+    incident_11:
+      id: 4
+      time: "2019-01-09 11:01"
+      device_serial: *serial_11
+      description: "description for incident_11"
+      report_path: "/tmp/report_11.txt"
+    incident_12:
+      id: 5
+      time: "2019-12-17 07:12"
+      device_serial: *serial_10
+      description: "description for incident_12"
+      report_path: "/tmp/report_12.txt"

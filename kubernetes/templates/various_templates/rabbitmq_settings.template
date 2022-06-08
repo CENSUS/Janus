@@ -1,0 +1,6 @@
+{
+  "rabbitmq_settings": {
+    "username": ${USERNAME},
+    "password": ${PASSWORD}
+  }
+}

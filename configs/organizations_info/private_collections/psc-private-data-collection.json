@@ -1,0 +1,50 @@
+[
+    {
+        "name": "AttikonhospitalMSPPrivateCollection",
+        "policy": "OR('AttikonhospitalMSP.member')",
+        "requiredPeerCount": 0,
+        "maxPeerCount": 1,
+        "blockToLive": 0,
+        "memberOnlyRead": true,
+        "memberOnlyWrite": true,
+        "endorsementPolicy": {
+            "signaturePolicy": "OR('AttikonhospitalMSP.member')"
+        }
+    },
+    {
+        "name": "GeneralhospitalofathensMSPPrivateCollection",
+        "policy": "OR('GeneralhospitalofathensMSP.member')",
+        "requiredPeerCount": 0,
+        "maxPeerCount": 1,
+        "blockToLive": 0,
+        "memberOnlyRead": true,
+        "memberOnlyWrite": true,
+        "endorsementPolicy": {
+            "signaturePolicy": "OR('GeneralhospitalofathensMSP.member')"
+        }
+    },
+    {
+        "name": "MedutilsMSPPrivateCollection",
+        "policy": "OR('MedutilsMSP.member')",
+        "requiredPeerCount": 0,
+        "maxPeerCount": 1,
+        "blockToLive": 0,
+        "memberOnlyRead": true,
+        "memberOnlyWrite": true,
+        "endorsementPolicy": {
+            "signaturePolicy": "OR('MedutilsMSP.member')"
+        }
+    },
+    {
+        "name": "HealthprodsMSPPrivateCollection",
+        "policy": "OR('HealthprodsMSP.member')",
+        "requiredPeerCount": 0,
+        "maxPeerCount": 1,
+        "blockToLive": 0,
+        "memberOnlyRead": true,
+        "memberOnlyWrite": true,
+        "endorsementPolicy": {
+            "signaturePolicy": "OR('HealthprodsMSP.member')"
+        }
+    }
+]

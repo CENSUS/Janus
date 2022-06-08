@@ -1,0 +1,64 @@
+{
+    "name": "acsc",
+    "version": "1.0.0",
+    "description": "Access Control Smart Contract",
+    "main": "index.js",
+    "engines": {
+        "node": "^14.18.1",
+        "npm": "^6.4.1"
+    },
+    "parser": "babel-eslint",
+    "rules": {
+        "comma-dangle": "off",
+        "indent": ["warn", 4],
+        "react/jsx-indent": ["warn", 4, {
+            "checkAttributes": true
+        }],
+        "react/react-in-jsx-scope": "off",
+        "react/destructuring-assignment": "off",
+        "no-nested-ternary": "warn",
+        "react/prop-types": "warn",
+        "react/prefer-stateless-function": "off"
+    },
+    "scripts": {
+        "lint": "eslint .",
+        "pretest": "npm run lint",
+        "test": "nyc mocha --recursive",
+        "start": "fabric-chaincode-node server --chaincode-address ${CHAINCODE_LISTEN_ADDRESS}:${CHAINCODE_PORT} --chaincode-id ${CHAINCODE_CCID} --chaincode-tls-cert-file ${TLS_CERT_PATH} --chaincode-tls-key-file ${TLS_CERT_KEY_PATH} --chaincode-tls-client-cacert-file ${TLS_CA_CERT_PATH}"
+    },
+    "engineStrict": true,
+    "author": "-",
+    "license": "Apache-2.0",
+    "dependencies": {
+        "fabric-contract-api": "^2.2.1",
+        "fabric-shim": "^2.2.1",
+        "got": "^11.8.1",
+        "promise": "^8.1.0"
+    },
+    "devDependencies": {
+        "chai": "^4.1.2",
+        "eslint": "^4.19.1",
+        "mocha": "^8.0.1",
+        "nyc": "^14.1.1",
+        "sinon": "^6.0.0",
+        "sinon-chai": "^3.2.0"
+    },
+    "nyc": {
+        "exclude": [
+            "coverage/**",
+            "test/**",
+            "index.js",
+            ".eslintrc.js"
+        ],
+        "reporter": [
+            "text-summary",
+            "html"
+        ],
+        "all": true,
+        "check-coverage": true,
+        "statements": 100,
+        "branches": 100,
+        "functions": 100,
+        "lines": 100
+    }
+}

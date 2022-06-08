@@ -1,0 +1,42 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: healthprods-proxy-admin-cli-common
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: healthprods-proxy-admin-cli-common
+  template:
+    metadata:
+      labels:
+        app: healthprods-proxy-admin-cli-common
+    spec:
+      containers:
+        - name: main
+          image: hyperledger/fabric-tools:{{FABRIC_VERSION}}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: FABRIC_CFG_PATH
+              value: /var/hyperledger/fabric/config/proxy
+            - name: FABRIC_CA_SERVER_HOME
+              value: "/var/hyperledger/ca-healthprods-server"
+            - name: FABRIC_CA_CLIENT_HOME
+              value: "/var/hyperledger/ca-healthprods-client"
+          args:
+            - sleep
+            - "2147483647"
+          workingDir: /
+          volumeMounts:
+            - name: fabric-volume
+              mountPath: /var/hyperledger
+            - name: fabric-config
+              mountPath: /var/hyperledger/fabric/config/proxy
+      volumes:
+        - name: fabric-volume
+          persistentVolumeClaim:
+            claimName: disk-claim-healthprods
+        - name: fabric-config
+          configMap:
+            name: healthprods-proxy-config

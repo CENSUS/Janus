@@ -1,0 +1,57 @@
+version: "3.7"
+services:
+    db:
+        image: "postgres:12.4-alpine"
+        container_name: "db"
+        restart: "always"
+        volumes:
+            - type: volume
+              source: psql-data
+              target: /var/lib/postgresql/data
+              volume:
+                  nocopy: true
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        networks:
+            - db_backend
+
+    db_api:
+        build:
+            context: api
+            dockerfile: db_api.dockerfile
+        container_name: "db_api"
+        depends_on:
+            - db
+        restart: "always"
+        networks:
+            - db_backend
+            - db_frontend
+        ports:
+            - 5000:8080
+        volumes:
+            - ./api/db_api/:/melity/db_api/
+            - ./api/bin/:/melity/bin/
+            - ./api/test_data/:/melity/test_data/
+
+    dbc_api:
+        build:
+            context: api
+            dockerfile: dbc_api.dockerfile
+        container_name: "dbc_api"
+        depends_on:
+            - db
+            - db_api
+        restart: "always"
+        networks:
+            - db_frontend
+        ports:
+            - 5005:5005
+        volumes:
+            - ./api/db_requests/:/melity/db_requests/
+
+networks:
+    db_backend:
+    db_frontend:
+volumes:
+    psql-data:

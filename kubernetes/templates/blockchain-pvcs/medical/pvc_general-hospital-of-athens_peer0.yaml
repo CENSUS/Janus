@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: general-hospital-of-athens-peer0-medical-disk-claim
+spec:
+  volumeName: pv-general-hospital-of-athens-peer0-medical-disk-claim
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+    limits:
+      storage: 5Gi

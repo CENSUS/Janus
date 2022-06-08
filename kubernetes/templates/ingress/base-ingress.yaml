@@ -1,0 +1,72 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: base-ingress-ssl-terminated
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+
+spec:
+  ingressClassName: public
+  rules:
+    - host: api.{{ INFRASTRUCTURE_ENDPOINT }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-api
+                port:
+                  number: 4220
+    - host: ca-attikon-hospital.{{ INFRASTRUCTURE_ENDPOINT }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ca-attikon-hospital
+                port:
+                  number: 443
+    - host: ca-general-hospital-of-athens.{{ INFRASTRUCTURE_ENDPOINT }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ca-general-hospital-of-athens
+                port:
+                  number: 443
+    - host: ca-medutils.{{ INFRASTRUCTURE_ENDPOINT }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ca-medutils
+                port:
+                  number: 443
+    - host: ca-healthprods.{{ INFRASTRUCTURE_ENDPOINT }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: ca-healthprods
+                port:
+                  number: 443
+    - host: vault.{{ INFRASTRUCTURE_ENDPOINT }}
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: vault
+                port:
+                  number: 8200

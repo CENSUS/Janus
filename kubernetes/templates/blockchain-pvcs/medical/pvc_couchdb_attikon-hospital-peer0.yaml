@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: couchdb-claim-peer0-attikon-hospital-medical
+spec:
+  volumeName: pv-couchdb-claim-peer0-attikon-hospital-medical
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+    limits:
+      storage: 5Gi

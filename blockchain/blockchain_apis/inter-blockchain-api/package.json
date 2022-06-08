@@ -1,0 +1,32 @@
+{
+  "name": "app.js",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon —exec babel-node app.js"
+  },
+  "engineStrict": true,
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hyperledger/fabric-gateway": "^1.0.0-dev.20220111.17",
+    "amqplib": "^0.8.0",
+    "axios": "^0.21.1",
+    "dotenv": "^14.3.2",
+    "fabric-ca-client": "^2.2.5",
+    "fabric-network": "^2.2.5",
+    "lodash": "^4.17.21",
+    "node-vault": "^0.9.21",
+    "pkcs11js": "^1.2.6",
+    "schm": "^0.4.1",
+    "ssl-root-cas": "^1.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "nodemon": "^2.0.15"
+  }
+}

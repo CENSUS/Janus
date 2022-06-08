@@ -1,0 +1,209 @@
+#!/bin/bash
+
+set -o errexit
+
+function get_info() {
+    echo
+    echo
+    echo "===================================================================SYSTEM PARAMETERS==================================================================="
+    echo
+    echo "Namespace: ${NS}"
+    echo "Default Channel: ${DEFAULT_CHANNEL}"
+    echo "Chaincodes' source: ${CC_SRC_PATH}"
+    echo "Organizations' Info Directory: ${ORG_DATA_DIR}"
+    echo "Chaincodes' Data: ${CC_DATA_JSON}"
+    echo "Chaincodes' Custom Templates Directory: ${CC_CUSTOM_TEMPLATES_DIR}"
+    echo
+    echo "Fabric CA Version: ${FABRIC_CA_VERSION}"
+    echo "Fabric Version: ${FABRIC_VERSION}"
+    echo
+    echo
+}
+
+function get_help() {
+    echo "_______________________________________________________________________________________________________________________________________________________"
+    echo "======================================================================================================================================================="
+    echo "Important! Before launching any Domain BC, you must first launch the Proxy Network"
+    echo "in order to initialize the BC environment"
+    echo
+    echo "----------------------------------------------------------------------------------------------------------------------------------------"
+    echo "To create a network, type: the network's name followed by the argument: up"
+    echo "e.g. ./network proxy up"
+    echo "----------------------------------------------------------------------------------------------------------------------------------------"
+    echo "To create a channel, type: the network's name followed by the arguments: channel create channel_name"
+    echo "e.g. ,/network proxy channel create basechannel"
+    echo "You may see the available channels at ${ORG_DATA_JSON}"
+    echo "The system mainly supports channel 'basechannel' for both the Proxy and the Domain BCs"
+    echo "----------------------------------------------------------------------------------------------------------------------------------------"
+    echo "To install the chaincodes, type: the network's name followed by the arguments: chaincode deploy channel_name"
+    echo "e.g. ./network medical chaincode deploy basechannel"
+    echo "If you don't include a Channel name, the default channel will be used ${DEFAULT_CHANNEL}"
+    echo "The procedure is fully automated"
+    echo "However, if there is a need to install a different version of a chaincode, you must change the 'version' and the 'sequence'"
+    echo "options to the appropriate (new) values"
+    echo "These values can be changed at: ${CC_DATA_JSON}"
+    echo "----------------------------------------------------------------------------------------------------------------------------------------"
+    echo "If for any reason there is a need to pause (delete the deployments) of a network, type: the network's name"
+    echo "followed by the argument: pause"
+    echo "e.g. ./network proxy pause"
+    echo "This action will destroy the pods of both the active orderers and the peers of the network"
+    echo "but any data that exists in the network, will not be erased"
+    echo "This command does not stop the pvcs, CAs, couchdbs etc."
+    echo "To unpause, type: ./network proxy unpause"
+    echo "----------------------------------------------------------------------------------------------------------------------------------------"
+    echo "In orderer to destroy the whole infrastructure, type: the namespace's name followed by the argument: destroy"
+    echo "The current (default) namespace is: ${NS}"
+    echo "e.g. ./network ${NS} destroy"
+    echo "----------------------------------------------------------------------------------------------------------------------------------------"
+    echo "========================================================================================================================================"
+}
+
+. scripts/init_values.sh
+. scripts/utils.sh
+. scripts/prereqs.sh
+. scripts/config.sh
+. scripts/CAs.sh
+. scripts/databases.sh
+. scripts/network.sh
+. scripts/channel.sh
+. scripts/chaincode.sh
+. scripts/helpers/chaincode_helpers.sh
+. scripts/helpers/various.sh
+. scripts/bootstrap_backend_application.sh
+. scripts/bootstrap_interblockchain_application.sh
+. scripts/bootstrap_client_application.sh
+. scripts/bootstrap_db_apis.sh
+. scripts/bootstrap_vault.sh
+. scripts/bootstrap_rabbitmq.sh
+. scripts/bootstrap_clients.sh
+. scripts/bootstrap_ingress.sh
+. scripts/bootstrap_initial_passwords.sh
+
+check_prereqs
+
+if [[ $# -lt 1 ]]; then
+    get_info
+    get_help
+    exit 0
+else
+    NETWORK_NAME=$1
+    MODE=$2
+    shift
+    shift
+fi
+
+logging_init
+
+if [ "${MODE}" == "up" ]; then
+
+    log "Launching network ${NETWORK_NAME^^}"
+    if [ $NETWORK_NAME == 'proxy' ]; then
+        bootstrap_passwords
+        base_up
+    fi
+    needed_by_all_domains
+    create_configs_and_msps
+    network_up
+    log "Network is ready."
+
+elif [ "${MODE}" == "unpause" ]; then
+
+    log "Unpausing network  ${NETWORK_NAME^^}"
+    network_up
+    log "Network ${NETWORK_NAME^^} is unpaused."
+
+elif [ "${MODE}" == "pause" ]; then
+
+    log "Pausing network  ${NETWORK_NAME^^}"
+    network_pause
+    log "Network ${NETWORK_NAME^^} is paused."
+
+elif [ "${NETWORK_NAME}" == "${NS}" ] && [ "${MODE}" == "destroy" ]; then
+
+    log "Shutting down the infrastructure"
+    network_destroy
+    log "Fabric network is down."
+
+elif [ "${MODE}" == "channel" ]; then
+    ACTION=$1
+    shift
+
+    if [ "${ACTION}" == "create" ]; then
+        PROPOSED_CHANNEL_NAME=$1
+        define_channel_data
+        log "Creating channel ${CHANNEL_NAME^^} at network ${NETWORK_NAME^^}"
+        channel_up
+        log "Finished building channel ${CHANNEL_NAME^^} at network ${NETWORK_NAME^^}."
+    else
+        exit 1
+    fi
+
+elif [ "${MODE}" == "chaincode" ]; then
+    ACTION=$1
+    shift
+
+    if [ "${ACTION}" == "deploy" ]; then
+        log "Deploying chaincode(s) at network ${NETWORK_NAME^^}"
+        PROPOSED_CHANNEL_NAME=${1}
+        define_channel_data
+        deploy_chaincode
+        log "Chaincode(s) successfully deployed at network ${NETWORK_NAME^^}."
+    elif [ "${ACTION}" == "start" ]; then
+        log "Starting chaincode "${1}" at network ${NETWORK_NAME^^}"
+        start_chaincode ${1}
+        log "Chaincode successfully stopped at network ${NETWORK_NAME^^}."
+    elif [ "${ACTION}" == "stop" ]; then
+        log "Stopping chaincode "${1}" at network ${NETWORK_NAME^^}"
+        stop_chaincode ${1}
+        log "Chaincode successfully stopped at network ${NETWORK_NAME^^}."
+    else
+        exit 1
+    fi
+
+elif [ "${MODE}" == "backend" ]; then
+    log "Getting: Backend API up"
+    backend_application_connection
+    log "Successful Operation"
+
+elif [ "${MODE}" == "interbc" ]; then
+    log "Getting: Inter-Blockchain API up"
+    interblockchain_application_connection
+    log "Successful Operation"
+
+elif [ "${MODE}" == "dbapis" ]; then
+    log "Getting: DB & DBC APIs up"
+    db_apis_application_connection
+    log "Successful Operation"
+
+elif [ "${MODE}" == "vault" ]; then
+    log "Getting: Vault up"
+    vault_connection
+    log "Successful Operation"
+
+elif [ "${MODE}" == "clientapp" ]; then
+    log "Creating the Executables of the Client Application"
+    client_application_bootstrap
+    log "Successful Operation"
+
+elif [ "${MODE}" == "clients" ]; then
+    log "Enrolling the Clients of the System"
+    bootstrap_clients
+    log "Successful Operation"
+
+elif [ "${MODE}" == "rabbitmq" ]; then
+    log "Creating the TLS information of various services"
+    bootstrap_rabbitmq
+    log "Successful Operation"
+
+elif [ "${MODE}" == "ingress" ]; then
+    ACTION=$1
+    shift
+    if [ "${ACTION}" == "up" ]; then
+        ingress_up
+    elif [ "${ACTION}" == "down" ]; then
+        ingress_down
+    fi
+
+else
+    exit 1
+fi

@@ -1,0 +1,58 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: couchdb-general-hospital-of-athens-peer0-medical
+spec:
+  ports:
+    - name: "5984"
+      port: 5984
+      targetPort: 5984
+  selector:
+    app: couchdb-general-hospital-of-athens-peer0-medical
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: couchdb-general-hospital-of-athens-peer0-medical
+spec:
+  serviceName: couchdb-general-hospital-of-athens-peer0-medical
+  replicas: 1
+  selector:
+    matchLabels:
+      app: couchdb-general-hospital-of-athens-peer0-medical
+  template:
+    metadata:
+      labels:
+        app: couchdb-general-hospital-of-athens-peer0-medical
+    spec:
+      containers:
+        - env:
+            - name: COUCHDB_USER
+              value: admin
+            - name: COUCHDB_PASSWORD
+              value: adminpw
+          image: couchdb:3.1.1
+          name: couchdbgehoatpeer0
+          ports:
+            - containerPort: 5984
+          volumeMounts:
+            - mountPath: /opt/couchdb/data/medical
+              name: couchdb-peer0-general-hospital-of-athens
+            # - name: tls-config
+            #   mountPath: /etc/ssl
+      restartPolicy: Always
+      volumes:
+        - name: couchdb-peer0-general-hospital-of-athens
+          persistentVolumeClaim:
+            claimName: couchdb-claim-peer0-general-hospital-of-athens
+        # - name: tls-config
+        #   secret:
+        #     secretName: couchdb-general-hospital-of-athens-peer0-medical-tls
+        #     items:
+        #       - key: ca.crt
+        #         path: ca.crt
+        #       - key: tls.crt
+        #         path: tls.crt
+        #       - key: tls.key
+        #         path: tls.key

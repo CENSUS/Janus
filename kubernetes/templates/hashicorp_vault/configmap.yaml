@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: vault-config
+data:
+  extraconfig-from-values.hcl: |-
+    disable_mlock = true
+    ui = true
+
+    listener "tcp" {
+      tls_disable = 0
+      address = "[::]:8200"
+      cluster_address = "[::]:8201"
+      tls_cert_file = "/vault/userconfig/vault-tls/tls.crt"
+      tls_key_file = "/vault/userconfig/vault-tls/tls.key"
+      tls_client_ca_file = "/vault/userconfig/vault-tls/ca.crt"
+      tls_require_and_verify_client_cert = 0
+    }
+
+    storage "file" {
+      path = "/vault/data"
+    }
+
+    plugin_directory = "/vault/plugins"

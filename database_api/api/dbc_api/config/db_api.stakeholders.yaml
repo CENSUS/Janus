@@ -1,0 +1,53 @@
+medical:
+  attikon-hospital:
+    uuid: "dffc7f9a-851c-4714-a8ca-f0ebfee1e434"
+    name: "attikon-hospital"
+    db_engine: "postgresql"
+    db_user: "postgres"
+    db_pass: "postgres"
+    db_host: "db"
+    db_port: 5432
+    db_name: "attikon-hospital"
+
+    clinics:
+      clinic_0:
+        uuid: "4181f798-3579-4b94-908e-71aac9dde0d0"
+        name: "clinic_0"
+      clinic_1:
+        uuid: "49507389-7457-4e8b-a5ec-d5fe7f563ac6"
+        name: "clinic_1"
+
+  general-hospital-of-athens:
+    uuid: "e3ff844f-b1a0-4e4b-917d-a4327ce6e293"
+    name: "general-hospital-of-athens"
+    db_engine: "postgresql"
+    db_user: "postgres"
+    db_pass: "postgres"
+    db_host: "db"
+    db_port: 5432
+    db_name: "general-hospital-of-athens"
+
+    clinics:
+      clinic_2:
+        uuid: "1c53abd3-fbaa-4977-9f59-2b8723d485cb"
+        name: "clinic_2"
+
+manufacturing:
+  medutils:
+    uuid: "34c3fa4c-af9a-4c09-a093-4f66d6ade57a"
+    name: "medutils"
+    db_engine: "postgresql"
+    db_user: "postgres"
+    db_pass: "postgres"
+    db_host: "db"
+    db_port: 5432
+    db_name: "medutils"
+  healthprods:
+    uuid: "13fcaf07-fdf8-409b-8a9c-52e1acf4360f"
+    name: "healthprods"
+    db_engine: "postgresql"
+    db_user: "postgres"
+    db_pass: "postgres"
+    db_host: "db"
+    db_port: 5432
+    db_name: "healthprods"

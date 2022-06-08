@@ -1,0 +1,57 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medutils-proxy-admin-cli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: medutils-proxy-admin-cli
+  template:
+    metadata:
+      labels:
+        app: medutils-proxy-admin-cli
+    spec:
+      containers:
+        - name: main
+          image: hyperledger/fabric-tools:{{FABRIC_VERSION}}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: FABRIC_CFG_PATH
+              value: /var/hyperledger/fabric/config/proxy
+            - name: CORE_PEER_MSPCONFIGPATH
+              value: /var/hyperledger/fabric/organizations/peerOrganizations/medutils/users/medutils-generaladmin@medutils/msp
+            - name: CORE_PEER_TLS_ROOTCERT_FILE
+              value: /var/hyperledger/fabric/organizations/peerOrganizations/medutils/msp/tlscacerts/ca-medutils.pem
+          args:
+            - sleep
+            - "2147483647"
+          workingDir: /root
+          volumeMounts:
+            - name: fabric-volume
+              mountPath: /var/hyperledger
+            - name: fabric-config
+              mountPath: /var/hyperledger/fabric/config/proxy
+      initContainers:
+        - name: msp-unfurl
+          image: busybox
+          command:
+            - sh
+            - -c
+            - "for msp in $(ls /msp/proxy/msp-*.tgz); do echo $msp && tar zxvf $msp -C /var/hyperledger/fabric; done"
+          volumeMounts:
+            - name: msp-config
+              mountPath: /msp/proxy
+            - name: fabric-volume
+              mountPath: /var/hyperledger
+      volumes:
+        - name: fabric-volume
+          persistentVolumeClaim:
+            claimName: disk-claim-medutils
+        - name: fabric-config
+          configMap:
+            name: medutils-proxy-config
+        - name: msp-config
+          configMap:
+            name: msp-config-proxy

@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: dbc-api
+  name: dbc-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: dbc-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        run: dbc-api
+    spec:
+      containers:
+        - image: dbc_api
+          imagePullPolicy: Never
+          name: dbc-api
+          ports:
+            - containerPort: 5005
+          resources: {}
+          volumeMounts:
+            - name: tls-config
+              mountPath: /melity/dbc_api/config/ssl
+              readOnly: true
+            - name: dbc-api-keys
+              mountPath: /melity/dbc_api/api_keys
+              readOnly: true
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: tls-config
+          secret:
+            secretName: dbc-api-tls
+            items:
+              - key: ca.crt
+                path: dbc_api_ca.crt
+              - key: tls.crt
+                path: dbc_api.crt
+              - key: tls.key
+                path: dbc_api.key
+        - name: dbc-api-keys
+          configMap:
+            name: dbc-api-api-keys-v1-map
+status: {}

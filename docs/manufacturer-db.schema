@@ -1,0 +1,73 @@
+manufacturer
+------------
+name: CHAR(24)
+
+firmware
+--------
+version : INTEGER
+sha1_hash : CHAR(40)
+path : VARCHAR
+
+device_model
+------------
+manufacturer_id
+title: CHAR(24)
+device_type: CHAR(24) // no need for separate table for this
+shipped_firmware : firmware_id
+latest_firmware_available : firmware_id
+
+manufactured_device
+-------------------
+device_model_id
+current_firmware : firmware_id
+due_for_maintenance : DATE
+
+###########################
+format for https://dbdiagram.io
+############################
+
+Table manufacturer{
+  uuid uuid [pk]
+  name varchar
+}
+
+Table firmware{
+  uuid uuid [pk]
+  version int
+  sha1_hash char(40)
+  path varchar
+  
+  manufacturer_uuid uuid [ref: > manufacturer.uuid]
+}
+
+Table device_model{
+  uuid uuid [pk]
+  shipped_firmware_uuid uuid [ref: > firmware.uuid]
+  latest_firmware_available uuid [ref: > firmware.uuid]
+  
+  manufacturer_uuid uuid [ref: > manufacturer.uuid]
+}
+
+Table manufactured_device{
+  uuid uuid [pk]
+  SN varchar [unique]
+  device_model_uuid  uuid [ref: > device_model.uuid]
+  current_firmware_uuid uuid [ref: > firmware.uuid]
+  due_for_maintenace date
+  manufacturer_uuid uuid [ref: > manufacturer.uuid]
+}
+
+Table staff{
+  uuid uuid [pk]
+  firstname varchar
+  surname varchar
+  job_type varchar
+  manufacturer_uuid uuid [ref: > manufacturer.uuid]
+}
+
+Table incidents{
+  id int [pk, increment]
+  device_SN varchar [ref: > manufactured_device.SN]
+  description varchar
+  manufacturer_uuid uuid [ref: > manufacturer.uuid]
+}

@@ -1,0 +1,8 @@
+name: frontend-api
+image: okteto/node:14
+namespace: melity
+command: bash
+sync:
+  - .:/usr/src/app
+forward:
+  - 4780:4780

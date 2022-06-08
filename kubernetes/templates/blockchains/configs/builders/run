@@ -1,0 +1,26 @@
+#!/bin/sh
+
+BUILD_OUTPUT_DIR="$1"
+RUN_METADATA_DIR="$2"
+
+echo >&2 "$RUN_METADATA_DIR"
+
+# setup the environment expected by the go chaincode shim
+export CORE_CHAINCODE_ID_NAME=$(tr -d '\n' <"$RUN_METADATA_DIR/chaincode.json" | awk -F':' '{ for (i = 1; i < NF; i++){ if ($i~/chaincode_id/) { print $(i+1); break }}}' | cut -d\" -f2)
+export CORE_PEER_TLS_ENABLED="true"
+export CORE_TLS_CLIENT_CERT_FILE="$RUN_METADATA_DIR/client.crt"
+export CORE_TLS_CLIENT_KEY_FILE="$RUN_METADATA_DIR/client.key"
+export CORE_PEER_TLS_ROOTCERT_FILE="$RUN_METADATA_DIR/root.crt"
+export CORE_PEER_LOCALMSPID=$(tr -d '\n' <"$RUN_METADATA_DIR/chaincode.json" | awk -F':' '{ for (i = 1; i < NF; i++){ if ($i~/mspid/) { print $(i+1); break }}}' | cut -d\" -f2)
+
+# populate the key and certificate material used by the go chaincode shim
+echo "$(tr -d '\n' <"$RUN_METADATA_DIR/chaincode.json" | awk -F':' '{ for (i = 1; i < NF; i++){ if ($i~/client_cert/) { print $(i+1); break }}}' | cut -d\" -f2)" | CORE_TLS_CLIENT_CERT_FILE
+echo "$(tr -d '\n' <"$RUN_METADATA_DIR/chaincode.json" | awk -F':' '{ for (i = 1; i < NF; i++){ if ($i~/client_key/) { print $(i+1); break }}}' | cut -d\" -f2)" | CORE_TLS_CLIENT_KEY_FILE"
+echo "$(tr -d '\n' <"$RUN_METADATA_DIR/chaincode.json" | awk -F':' '{ for (i = 1; i < NF; i++){ if ($i~/root_cert/) { print $(i+1); break }}}' | cut -d\" -f2)" | CORE_PEER_TLS_ROOTCERT_FILE"
+
+if [ -z echo "$(tr -d '\n' <"$RUN_METADATA_DIR/chaincode.json" | awk -F':' '{ for (i = 1; i < NF; i++){ if ($i~/client_cert/) { print $(i+1); break }}}' | cut -d\" -f2)" ]; then
+    export CORE_PEER_TLS_ENABLED="false"
+fi
+
+# exec the chaincode to replace the script with the chaincode process
+exec "$BUILD_OUTPUT_DIR/chaincode" -peer.address=$(tr -d '\n' <"$ARTIFACTS/chaincode.json" | awk -F':' '{ for (i = 1; i < NF; i++){ if ($i~/peer_address/) { print $(i+1); break }}}' | cut -d\" -f2)

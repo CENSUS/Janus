@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}
+  labels:
+    app: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}
+spec:
+  selector:
+    matchLabels:
+      app: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}
+    spec:
+      serviceAccountName: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}
+      containers:
+        - image: { { CHAINCODE_IMAGE } }
+          imagePullPolicy: IfNotPresent
+          name: main
+          envFrom:
+            - configMapRef:
+                name: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}-env
+          volumeMounts:
+            - mountPath: /var/hyperledger
+              name: fabric-volume
+          ports:
+            - containerPort: 9999
+      volumes:
+        - name: fabric-volume
+          persistentVolumeClaim:
+            claimName: disk-claim-{{ CHAINCODE_ORGANIZATION }}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}
+  labels:
+    app: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}
+spec:
+  ports:
+    - name: chaincode
+      port: 9999
+      targetPort: 9999
+      protocol: TCP
+  selector:
+    app: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}

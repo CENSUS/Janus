@@ -1,0 +1,20 @@
+[
+    {
+        "username": "docatho00",
+        "organization": "attikon-hospital",
+        "dataid": "DATA_00",
+        "reqInvs": "80"
+    },
+    {
+        "username": "docatho01",
+        "organization": "attikon-hospital",
+        "dataid": "DATA_00",
+        "reqInvs": "-1"
+    },
+    {
+        "username": "persmedutils00",
+        "organization": "medutils",
+        "dataid": "DATA_04",
+        "reqInvs": "-1"
+    }
+]

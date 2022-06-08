@@ -1,0 +1,47 @@
+{
+    "DATA_00": {
+        "data_00": {
+            "parameters": {
+                "uuid": "d39d3d4f-1c39-48dc-82a3-a89ddb5d2f72",
+                "dataID": "data_00"
+            }
+        }
+    },
+    "DATA_01": {
+        "data_01": {
+            "parameters": {
+                "serial": "serial_00",
+                "dataID": "data_01"
+            },
+            "organization": "34c3fa4c-af9a-4c09-a093-4f66d6ade57a"
+        }
+    },
+    "DATA_02": {
+        "data_02": {
+            "parameters": {
+                "uuid": "d39d3d4f-1c39-48dc-82a3-a89ddb5d2f72",
+                "dataID": "data_02"
+            },
+            "organization": "13fcaf07-fdf8-409b-8a9c-52e1acf4360f"
+        }
+    },
+    "DATA_03": {
+        "data_03": {
+            "parameters": {
+                "uuid": "d39d3d4f-1c39-48dc-82a3-a89ddb5d2f72",
+                "clinic_uuid": "d39d3d4f-1c39-48dc-82a3-a89ddb5d2f72",
+                "start_date": "2022-01-05",
+                "end_date": "2022-01-28",
+                "dataID": "data_03"
+            }
+        }
+    },
+    "DATA_04": {
+        "data_04": {
+            "parameters": {
+                "model": "model00",
+                "dataID": "data_04"
+            }
+        }
+    }
+}

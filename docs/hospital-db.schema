@@ -1,0 +1,124 @@
+#############################################
+format for https://dbdiagram.io 
+#############################################
+
+Table organization{
+  uuid uuid [pk]
+  name varchar
+  logo_url varchar
+}
+
+Table clinic {
+  uuid uuid [pk]
+  name varchar
+  address varchar
+}
+
+Table patient {
+  uuid uuid [pk]
+  SSN varchar [unique]
+  firstname varchar
+  surname varchar
+  weight int
+  address varchar
+  date_of_birth date
+}
+
+Table doctor{
+  guid uuid [pk]
+  firstname varchar
+  surname varchar
+  specialty varchar
+}
+
+Table doctor_contract{
+  uuid uuid [pk]
+  doctor_guid uuid [ref: > doctor.guid]
+  contract_start date
+  contract_end date [null]
+  clinic_stationed uuid [ref: > clinic.uuid]
+}
+
+Table er_duty{
+  id int [pk, increment]
+  start_time datetime
+  end_time datetime
+  doctor_contract_uuid uuid [ref: > doctor_contract.uuid]
+}
+
+Table treatment{
+  uuid uuid [pk]
+  clinic_uuid uuid [ref: > clinic.uuid]
+  patient_uuid uuid [ref: > patient.uuid]
+  start_date date
+  last_update_date date
+  description varchar
+  status varchar
+}
+
+Table prescription{
+  uuid uuid [pk]
+  treatment_uuid uuid [ref: > treatment.uuid]
+  doctor_contract_uuid uuid  [ref: > doctor_contract.uuid]
+  entry_time datetime
+  prescription_path varchar
+  
+}
+
+Table diagnosis{
+  uuid uuid [pk]
+  treatment_uuid uuid [ref: > treatment.uuid]
+  doctor_contract_uuid uuid  [ref: > doctor_contract.uuid]
+  entry_time datetime
+  diagnosis_data varchar
+  disease_uuid uuid [null, ref: > disease.uuid]
+}
+
+Table disease{
+  uuid uuid [pk]
+  name varchar
+  description varchar
+  symptoms varchar
+}
+
+Table diagnostic_test_data{
+  uuid uuid [pk]
+  diagnosis_uuid uuid [ref: > diagnosis.uuid]
+  test_type varchar
+  entry_time datetime
+  test_data varchar
+}
+
+
+Table technician{
+  guid uuid [pk]
+  firstname varchar
+  surname varchar
+}
+
+Table technician_contract{
+  uuid uuid [pk]
+  technician_guid uuid [ref: > technician.guid]
+  contract_start date
+  contract_end date [null]
+}
+
+Table medical_device{
+  uuid uuid [pk]
+  serial varchar [unique]
+  manufacturer varchar
+  model varchar
+  install_date date
+  last_maint_uuid uuid [null, ref: > medical_device_maint.uuid]
+  next_required_maint date
+  clinic_uuid uuid [ref: > clinic.uuid]
+}
+
+Table medical_device_maint{
+  uuid uuid [pk]
+  device_uuid uuid [ref: > medical_device.uuid]
+  description varchar
+  technician_contract_uuid uuid [ref: > technician_contract.uuid]
+  maint_start datetime
+  maint_end datetime
+}

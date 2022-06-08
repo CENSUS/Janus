@@ -1,0 +1,128 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: attikon-hospital-peer0-proxy-config-env
+data:
+  FABRIC_CFG_PATH: /var/hyperledger/fabric/config/proxy
+  FABRIC_LOGGING_SPEC: DEBUG #"debug:cauthdsl,policies,msp,grpc,peer.gossip.mcs,gossip,leveldbhelper=info"
+  CORE_PEER_TLS_ENABLED: "true"
+  CORE_PEER_TLS_CERT_FILE: /var/hyperledger/fabric/organizations/peerOrganizations/attikon-hospital/peers/attikon-hospital-peer0.attikon-hospital/tls/signcerts/cert.pem
+  CORE_PEER_TLS_KEY_FILE: /var/hyperledger/fabric/organizations/peerOrganizations/attikon-hospital/peers/attikon-hospital-peer0.attikon-hospital/tls/keystore/server.key
+  CORE_PEER_TLS_ROOTCERT_FILE: /var/hyperledger/fabric/organizations/peerOrganizations/attikon-hospital/peers/attikon-hospital-peer0.attikon-hospital/tls/cacerts/ca-attikon-hospital.pem
+  CORE_PEER_ID: attikon-hospital-peer0
+  CORE_PEER_ADDRESS: attikon-hospital-peer0:7051
+  CORE_PEER_LISTENADDRESS: 0.0.0.0:7051
+  # CORE_PEER_CHAINCODEADDRESS: attikon-hospital-peer0:7052
+  # CORE_PEER_CHAINCODELISTENADDRESS: 0.0.0.0:7052
+  # bootstrap peer is the other peer in the same org
+  # CORE_PEER_GOSSIP_BOOTSTRAP: attikon-hospital-peerx:port
+  CORE_PEER_GOSSIP_EXTERNALENDPOINT: attikon-hospital-peer0:7051
+  CORE_PEER_LOCALMSPID: AttikonhospitalMSP
+  CORE_PEER_MSPCONFIGPATH: /var/hyperledger/fabric/organizations/peerOrganizations/attikon-hospital/peers/attikon-hospital-peer0.attikon-hospital/msp
+  CORE_OPERATIONS_LISTENADDRESS: 0.0.0.0:9443
+  CORE_PEER_FILESYSTEMPATH: /var/hyperledger/fabric/data/attikon-hospital-peer0-fs/proxy
+  CORE_LEDGER_SNAPSHOTS_ROOTDIR: /var/hyperledger/fabric/data/attikon-hospital-peer0/snapshots/proxy
+  CORE_LEDGER_STATE_STATEDATABASE: CouchDB
+  CORE_LEDGER_STATE_COUCHDBCONFIG_COUCHDBADDRESS: couchdb-attikon-hospital-peer0-proxy:5984
+  CORE_LEDGER_STATE_COUCHDBCONFIG_USERNAME: admin
+  CORE_LEDGER_STATE_COUCHDBCONFIG_PASSWORD: adminpw
+  # GATEWAY SETTINGS
+  CORE_PEER_GATEWAY_ENABLED: "true"
+  CORE_PEER_ADDRESSAUTODETECT: "true"
+  CORE_METRICS_PROVIDER: prometheus
+  # CORE_CHAINCODE_BUILDER: hyperledger/fabric-ccenv:2.4.0-beta
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: attikon-hospital-peer0
+  name: attikon-hospital-peer0
+spec:
+  ports:
+    - name: gossip
+      port: 7051
+      protocol: TCP
+    - name: chaincode
+      port: 7052
+      protocol: TCP
+    - name: gateway
+      port: 7053
+      protocol: TCP
+    - name: operations
+      port: 9443
+      protocol: TCP
+  selector:
+    app: attikon-hospital-peer0
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: attikon-hospital-peer0
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: attikon-hospital-peer0
+  template:
+    metadata:
+      labels:
+        app: attikon-hospital-peer0
+    spec:
+      containers:
+        # - args:
+        #     - peer
+        #     - node
+        #     - start
+        # env:
+        # - name: CORE_CHAINCODE_EXECUTETIMEOUT
+        #   value: 300s
+        # - name: CORE_CHAINCODE_DEPLOYTIMEOUT
+        #   value: 300s
+        # - name: CORE_PEER_GOSSIP_USELEADERELECTION
+        #   value: "true"
+        # - name: CORE_PEER_GOSSIP_ORGLEADER
+        #   value: "false"
+        # - name: CORE_PEER_GOSSIP_SKIPHANDSHAKE
+        #   value: "true"
+        - image: hyperledger/fabric-peer:{{FABRIC_VERSION}}
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - configMapRef:
+                name: attikon-hospital-peer0-proxy-config-env
+          name: main
+          ports:
+            - containerPort: 7051
+            - containerPort: 7052
+            - containerPort: 7053
+            - containerPort: 9443
+          volumeMounts:
+            # - mountPath: /builders/external/bin/
+            #   name: external-builder
+            - name: fabric-config
+              mountPath: /var/hyperledger/fabric/config/proxy
+            - name: fabric-volume
+              mountPath: /var/hyperledger
+            - name: ccs-builder
+              mountPath: /var/hyperledger/fabric/chaincode/ccs-builder/bin
+      restartPolicy: Always
+      initContainers:
+        - name: fabric-ccs-builder
+          image: ghcr.io/hyperledgendary/fabric-ccs-builder
+          imagePullPolicy: IfNotPresent
+          command: [sh, -c]
+          args:
+            ["cp /go/bin/* /var/hyperledger/fabric/chaincode/ccs-builder/bin/"]
+          volumeMounts:
+            - name: ccs-builder
+              mountPath: /var/hyperledger/fabric/chaincode/ccs-builder/bin
+      volumes:
+        - name: fabric-config
+          configMap:
+            name: attikon-hospital-proxy-config
+        - name: fabric-volume
+          persistentVolumeClaim:
+            claimName: disk-claim-attikon-hospital
+        - name: ccs-builder
+          emptyDir: {}

@@ -1,0 +1,68 @@
+[
+    {
+        "uuid": "d39d3d4f-1c39-48dc-82a3-a89ddb5d2f72",
+        "SSN": "SSN_00",
+        "firstname": "anna",
+        "surname": "leighton",
+        "weight": 52,
+        "address": "address_00",
+        "date_of_birth": "1984-05-04",
+        "treatments": [
+            {
+                "uuid": "6844f5e0-56af-4760-a919-561373486aeb",
+                "clinic_uuid": "4181f798-3579-4b94-908e-71aac9dde0d0",
+                "patient_uuid": "d39d3d4f-1c39-48dc-82a3-a89ddb5d2f72",
+                "start_date": "2020-03-04",
+                "last_update_date": "2020-03-14",
+                "end_date": "2020-03-14",
+                "description": "treatment of patient_00 in clinic_0",
+                "status": "status_00"
+            },
+            {
+                "uuid": "3deebea4-c75f-4278-b1b3-c3f23611255f",
+                "clinic_uuid": "4181f798-3579-4b94-908e-71aac9dde0d0",
+                "patient_uuid": "d39d3d4f-1c39-48dc-82a3-a89ddb5d2f72",
+                "start_date": "2020-03-14",
+                "last_update_date": "2020-04-02",
+                "end_date": "2020-04-02",
+                "description": "second treatment of patient_00 in clinic_0",
+                "status": "status_03"
+            }
+        ],
+        "prescriptions": [
+            {
+                "uuid": "29950d30-8533-49bb-9cb5-a51daf824f25",
+                "treatment_uuid": "6844f5e0-56af-4760-a919-561373486aeb",
+                "doctor_contract_uuid": "d527065f-55b1-4cc8-b516-270dc77e5bfc",
+                "entry_time": "2020-03-04T12:33:00",
+                "prescription_path": "/tmp/prescription_00.txt"
+            },
+            {
+                "uuid": "e01f7e14-fe3a-4698-a0ae-c89fcc3b5b95",
+                "treatment_uuid": "3deebea4-c75f-4278-b1b3-c3f23611255f",
+                "doctor_contract_uuid": "d527065f-55b1-4cc8-b516-270dc77e5bfc",
+                "entry_time": "2020-03-14T08:27:00",
+                "prescription_path": "/tmp/prescription_03.txt"
+            }
+        ],
+        "diagnoses": [
+            {
+                "uuid": "e70b0dbc-46fe-40bf-a76a-708e0faf2ce9",
+                "treatment_uuid": "6844f5e0-56af-4760-a919-561373486aeb",
+                "doctor_contract_uuid": "10a3ebe7-131a-42ac-9c04-e2507fea4c86",
+                "entry_time": "2020-03-05T12:23:00",
+                "diagnosis_data": "diagnosis for treatment_00 in clinic_0",
+                "disease_uuid": "fbdc32fd-47ae-467f-ad61-29144de20402"
+            },
+            {
+                "uuid": "f43b04cd-1cc1-46ce-ab78-d293aed907a4",
+                "treatment_uuid": "3deebea4-c75f-4278-b1b3-c3f23611255f",
+                "doctor_contract_uuid": "d527065f-55b1-4cc8-b516-270dc77e5bfc",
+                "entry_time": "2020-03-16T08:10:00",
+                "diagnosis_data": "diagnosis for treatment_03 in clinic_0",
+                "disease_uuid": "ff05a670-d378-458e-bd91-170199ef58a8"
+            }
+        ],
+        "organization_uuid": "dffc7f9a-851c-4714-a8ca-f0ebfee1e434"
+    }
+]

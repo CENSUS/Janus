@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: db-api
+  name: db-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: db-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        run: db-api
+    spec:
+      containers:
+        - image: db_api
+          imagePullPolicy: Never
+          name: main
+          ports:
+            - containerPort: 5000
+          resources: {}
+          volumeMounts:
+            - name: tls-config
+              mountPath: /melity/db_api/config/ssl
+              readOnly: true
+            - name: db-api-keys
+              mountPath: /melity/db_api/api_keys
+              readOnly: true
+            - name: vault-org-creds-settings
+              mountPath: /melity/db_api/vault_creds/organizations
+              readOnly: true
+      restartPolicy: Always
+      serviceAccountName: "db-api"
+      volumes:
+        - name: tls-config
+          secret:
+            secretName: db-api-tls
+            items:
+              - key: ca.crt
+                path: db_api_ca.crt
+              - key: tls.crt
+                path: db_api.crt
+              - key: tls.key
+                path: db_api.key
+        - name: db-api-keys
+          configMap:
+            name: db-api-api-keys-v1-map
+        - name: vault-org-creds-settings
+          configMap:
+            name: vault-settings-organizations-credentials-v1-map
+
+status: {}

@@ -1,0 +1,14 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: medutils-peer0-manufacturer-disk-claim
+spec:
+  volumeName: pv-medutils-peer0-manufacturer-disk-claim
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+    limits:
+      storage: 5Gi

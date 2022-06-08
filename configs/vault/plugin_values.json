@@ -1,0 +1,9 @@
+{
+    "VAULT_PLUGINS_DIR": "/vault/plugins",
+    "PLUGINS": [
+        {
+            "PLUGIN_NAME": "abe",
+            "PLUGIN_VAULT_PATH": "stakeholders_abe_engine"
+        }
+    ]
+}

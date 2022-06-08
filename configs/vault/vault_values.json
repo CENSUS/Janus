@@ -1,0 +1,57 @@
+{
+    "VAULT_SVC_AUTHENTICATOR": "vault-auth",
+    "KUBERNETES_HOST": "https://kubernetes.default.svc:443",
+    "SERVICE_ACCOUNTS": [
+        {
+            "role": "db-api",
+            "accountName": "db-api",
+            "policy": "default"
+        },
+        {
+            "role": "kssc-role-attikon-hospital",
+            "accountName": "cc-kssc-attikon-hospital",
+            "policy": "attikon-hospital-admin"
+        },
+        {
+            "role": "kssc-role-general-hospital-of-athens",
+            "accountName": "cc-kssc-general-hospital-of-athens",
+            "policy": "general-hospital-of-athens-admin"
+        },
+        {
+            "role": "kssc-role-medutils",
+            "accountName": "cc-kssc-medutils",
+            "policy": "medutils-admin"
+        },
+        {
+            "role": "kssc-role-healthprods",
+            "accountName": "cc-kssc-healthprods",
+            "policy": "healthprods-admin"
+        }
+    ],
+    "VAULT_USER_GROUPS": [
+        {
+            "groupName": "ATTIKON-HOSPITAL-SUBJECT-GROUP",
+            "groupPolicies": [
+                "attikon-hospital-subject"
+            ]
+        },
+        {
+            "groupName": "GENERAL-HOSPITAL-OF-ATHENS-SUBJECT-GROUP",
+            "groupPolicies": [
+                "general-hospital-of-athens-subject"
+            ]
+        },
+        {
+            "groupName": "MEDUTILS-SUBJECT-GROUP",
+            "groupPolicies": [
+                "medutils-subject"
+            ]
+        },
+        {
+            "groupName": "HEALTHPRODS-SUBJECT-GROUP",
+            "groupPolicies": [
+                "healthprods-subject"
+            ]
+        }
+    ]
+}

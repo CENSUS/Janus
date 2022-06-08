@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}-env
+data:
+  CHAINCODE_CCID: { { CHAINCODE_CCID } }
+  CHAINCODE_ADDRESS: cc-{{ CHAINCODE_NAME }}-{{ CHAINCODE_ORGANIZATION }}
+  CHAINCODE_LISTEN_ADDRESS: "0.0.0.0"
+  CHAINCODE_PORT: "9999"
+  TLS_CA_CERT_PATH: /var/hyperledger/fabric/organizations/peerOrganizations/{{ CHAINCODE_ORGANIZATION }}/chaincodes/cc-{{ CHAINCODE_ORGANIZATION }}-{{ CHAINCODE_NAME }}@{{ CHAINCODE_ORGANIZATION }}/tls/cacerts/ca-{{ CHAINCODE_ORGANIZATION }}.pem
+  TLS_CERT_PATH: /var/hyperledger/fabric/organizations/peerOrganizations/{{ CHAINCODE_ORGANIZATION }}/chaincodes/cc-{{ CHAINCODE_ORGANIZATION }}-{{ CHAINCODE_NAME }}@{{ CHAINCODE_ORGANIZATION }}/tls/signcerts/cert.pem
+  TLS_CERT_KEY_PATH: /var/hyperledger/fabric/organizations/peerOrganizations/{{ CHAINCODE_ORGANIZATION }}/chaincodes/cc-{{ CHAINCODE_ORGANIZATION }}-{{ CHAINCODE_NAME }}@{{ CHAINCODE_ORGANIZATION }}/tls/keystore/server.key
+  TZ: Europe/Athens
+  DBC_API_HOSTNAME: "dbc-api"
+  DBC_API_PORT: "5005"
+  VAULT_ADDR: vault
+  VAULT_PORT: "8200"
+  VAULT_ROLE: kssc-role-{{ CHAINCODE_ORGANIZATION }}
+  VAULT_LOGIN_ENDPOINT: "v1/auth/kubernetes/login"
+  VAULT_SYSTEM_DECRYPT_ENDPOINT: v1/{{ ABE_PLUGIN_DOMAIN }}/sysdecrypt/{{ CHAINCODE_ORGANIZATION }}
+  VAULT_TOKEN_CHECK_TO_REFRESH_EVERY: "5"
+  VAULT_TOKEN_REFRESH_PERIOD: "30"
+  SYSTEM_DECRYPTION_POLICY: "SA"
+  TLS_CA_MINISTRY_CERT_FILE: /var/hyperledger/fabric/applications/chaincodes/{{ CHAINCODE_ORGANIZATION }}/cc-{{ CHAINCODE_ORGANIZATION }}-{{ CHAINCODE_NAME }}/tls/cacerts/ca-ministry-of-health.pem
+  TLS_MINISTRY_CERT_FILE: /var/hyperledger/fabric/applications/chaincodes/{{ CHAINCODE_ORGANIZATION }}/cc-{{ CHAINCODE_ORGANIZATION }}-{{ CHAINCODE_NAME }}/tls/signcerts/cert.pem
+  TLS_CERT_MINISTRY_KEY_FILE: /var/hyperledger/fabric/applications/chaincodes/{{ CHAINCODE_ORGANIZATION }}/cc-{{ CHAINCODE_ORGANIZATION }}-{{ CHAINCODE_NAME }}/tls/keystore/server.key

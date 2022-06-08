@@ -1,0 +1,57 @@
+{
+    "VAULT_ADDRESS": "https://vault%APPEND_INFRASTRUCTURE_ENDPOINT",
+    "ORGANIZATIONS": [
+        {
+            "organizationName": "attikon-hospital",
+            "organizationVaultPW": "PASSWORD_NOT_DEFINED",
+            "vaultPolicy": "attikon-hospital-admin",
+            "domain": "stakeholders_abe_engine",
+            "ABE_ATTRIBUTES": {
+                "COMMON_ATTRIBUTES": [
+                    "doctor",
+                    "doctor_er",
+                    "researcher"
+                ],
+                "AUTHORITY_ATTRIBUTES": []
+            }
+        },
+        {
+            "organizationName": "general-hospital-of-athens",
+            "organizationVaultPW": "PASSWORD_NOT_DEFINED",
+            "vaultPolicy": "general-hospital-of-athens-admin",
+            "domain": "stakeholders_abe_engine",
+            "ABE_ATTRIBUTES": {
+                "COMMON_ATTRIBUTES": [
+                    "doctor",
+                    "doctor_er",
+                    "researcher"
+                ],
+                "AUTHORITY_ATTRIBUTES": []
+            }
+        },
+        {
+            "organizationName": "medutils",
+            "organizationVaultPW": "PASSWORD_NOT_DEFINED",
+            "vaultPolicy": "medutils-admin",
+            "domain": "stakeholders_abe_engine",
+            "ABE_ATTRIBUTES": {
+                "COMMON_ATTRIBUTES": [
+                    "manufacturing_staff"
+                ],
+                "AUTHORITY_ATTRIBUTES": []
+            }
+        },
+        {
+            "organizationName": "healthprods",
+            "organizationVaultPW": "PASSWORD_NOT_DEFINED",
+            "vaultPolicy": "healthprods-admin",
+            "domain": "stakeholders_abe_engine",
+            "ABE_ATTRIBUTES": {
+                "COMMON_ATTRIBUTES": [
+                    "manufacturing_staff"
+                ],
+                "AUTHORITY_ATTRIBUTES": []
+            }
+        }
+    ]
+}

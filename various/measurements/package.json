@@ -1,0 +1,28 @@
+{
+    "name": "system-measurements",
+    "description": "System Measurements",
+    "version": "0.1.0",
+    "main": "run.js",
+    "homepage": ".",
+    "private": true,
+    "type": "module",
+    "dependencies": {
+        "chalk": "^5.0.1",
+        "dotenv": "^16.0.0",
+        "fabric-ca-client": "^2.2.11",
+        "inquirer": "^8.2.2",
+        "nodemon": "^2.0.15",
+        "public-ip": "^5.0.0"
+    },
+    "scripts": {
+        "start": "node run.js",
+        "nodemon-debug": "nodemon -I"
+    },
+    "devDependencies": {
+        "@fidm/x509": "^1.2.1",
+        "@grpc/grpc-js": "^1.5.0",
+        "@hyperledger/fabric-gateway": "^0.1.1-dev.20211110.10",
+        "async": "^3.2.3",
+        "axios": "^0.21.1"
+    }
+}

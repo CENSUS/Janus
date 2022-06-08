@@ -1,0 +1,32 @@
+{
+  "CHAINCODE_IDS": {
+    "attikon-hospital": {
+      "PSC": "",
+      "LSC": "",
+      "TMSC": "",
+      "ACSC": "",
+      "KSSC": ""
+    },
+    "general-hospital-of-athens": {
+      "PSC": "",
+      "LSC": "",
+      "TMSC": "",
+      "ACSC": "",
+      "KSSC": ""
+    },
+    "medutils": {
+      "PSC": "",
+      "LSC": "",
+      "TMSC": "",
+      "ACSC": "",
+      "KSSC": ""
+    },
+    "healthprods": {
+      "PSC": "",
+      "LSC": "",
+      "TMSC": "",
+      "ACSC": "",
+      "KSSC": ""
+    }
+  }
+}

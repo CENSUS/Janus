@@ -1,0 +1,1085 @@
+{
+  "ATTIKON-HOSPITAL": {
+    "ACL": {
+      "141debdc-cf00-417c-a7b9-b56268a984bc": {
+        "DOCTOR_OF": [
+          "d39d3d4f-1c39-48dc-82a3-a89ddb5d2f72"
+        ],
+        "DOCTOR_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "16:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ],
+          "SUNDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ]
+        },
+        "RESEARCHER_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "16:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ],
+          "SUNDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ]
+        }
+      },
+      "b34c611a-9970-4ace-9591-5d32246bb9dd": {
+        "DOCTOR_OF": [
+          "db1091cf-4884-4002-9db2-754761c1f14f"
+        ],
+        "DOCTOR_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "12:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "18:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "10:00"
+            },
+            {
+              "FROM": "13:00",
+              "TO": "18:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        },
+        "RESEARCHER_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "16:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ],
+          "SUNDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ]
+        }
+      },
+      "10b7b1ca-e993-4dc7-ae74-be54799deef5": {
+        "DOCTOR_OF": [
+          "56fa3ecb-e8d6-4975-92f6-6bb5ab7974ed"
+        ],
+        "DOCTOR_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "12:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "18:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "10:00"
+            },
+            {
+              "FROM": "13:00",
+              "TO": "18:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        },
+        "RESEARCHER_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "16:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ],
+          "SUNDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ]
+        }
+      },
+      "2269163b-a2cd-40b0-bf86-5c2b8047b37a": {
+        "DOCTOR_OF": [
+          "0cba7673-5157-43b0-baf9-110774431020"
+        ],
+        "DOCTOR_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "12:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "18:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "10:00"
+            },
+            {
+              "FROM": "13:00",
+              "TO": "18:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        },
+        "RESEARCHER_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "16:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ],
+          "SUNDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ]
+        }
+      },
+      "99319c9d-6dda-4cd2-9803-5b9a310cdb77": {
+        "DOCTOR_OF": [
+          "fbe11d8f-a925-4aad-a7ff-c2d965690e02"
+        ],
+        "DOCTOR_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "12:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "18:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "10:00"
+            },
+            {
+              "FROM": "13:00",
+              "TO": "18:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        },
+        "RESEARCHER_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "16:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ],
+          "SUNDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ]
+        }
+      },
+      "4fe6945e-5896-4bb1-89f2-2ee4a90bf6ef": {
+        "TECHNICIAN_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "18:30",
+              "TO": "19:30"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "10:00"
+            },
+            {
+              "FROM": "19:00",
+              "TO": "24:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:30",
+              "TO": "15:30"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:30",
+              "TO": "15:30"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:30"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SUNDAY": [
+            {
+              "FROM": "15:00",
+              "TO": "23:00"
+            }
+          ]
+        }
+      },
+      "b722511c-a35e-4b01-a510-5e889e9e12b5": {
+        "TECHNICIAN_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "18:30",
+              "TO": "19:30"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:30",
+              "TO": "15:30"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:45",
+              "TO": "15:45"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        }
+      }
+    },
+    "ORGANIZATION": "ATTIKON-HOSPITAL"
+  },
+  "GENERAL-HOSPITAL-OF-ATHENS": {
+    "ACL": {
+      "a51033a3-b4c0-4b87-a902-6d472190682c": {
+        "DOCTOR_OF": [
+          "491ae19b-6c5b-4405-8908-8d83b820aa98"
+        ],
+        "DOCTOR_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "12:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "18:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "10:00"
+            },
+            {
+              "FROM": "13:00",
+              "TO": "18:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        },
+        "RESEARCHER_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "16:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ],
+          "SUNDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ]
+        }
+      },
+      "cf4f4bb1-d12a-4df0-97e2-ae0a4cb269e2": {
+        "DOCTOR_OF": [
+          "491ae19b-6c5b-4405-8908-8d83b820aa98"
+        ],
+        "DOCTOR_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "12:00"
+            },
+            {
+              "FROM": "15:00",
+              "TO": "18:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "10:00"
+            },
+            {
+              "FROM": "13:00",
+              "TO": "18:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        },
+        "RESEARCHER_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ],
+          "SUNDAY": [
+            {
+              "FROM": "18:00",
+              "TO": "02:00"
+            }
+          ]
+        }
+      },
+      "4fe6945e-5896-4bb1-89f2-2ee4a90bf6ef": {
+        "TECHNICIAN_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "15:30",
+              "TO": "16:30"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "18:30",
+              "TO": "19:30"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "09:00",
+              "TO": "17:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "08:30",
+              "TO": "15:00"
+            },
+            {
+              "FROM": "19:00",
+              "TO": "21:30"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        }
+      },
+      "aad0dbe1-54bc-4ff5-bef1-730b2bf70bef": {
+        "TECHNICIAN_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "15:30",
+              "TO": "16:30"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "18:30",
+              "TO": "19:30"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "09:00",
+              "TO": "17:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "08:30",
+              "TO": "15:00"
+            },
+            {
+              "FROM": "19:00",
+              "TO": "21:30"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        }
+      }
+    },
+    "ORGANIZATION": "GENERAL-HOSPITAL-OF-ATHENS"
+  },
+  "MEDUTILS": {
+    "ACL": {
+      "4fe6945e-5896-4bb1-89f2-2ee4a90bf6ef": {
+        "TECHNICIAN_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "15:30",
+              "TO": "16:30"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "18:30",
+              "TO": "19:30"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "09:00",
+              "TO": "17:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "08:30",
+              "TO": "15:00"
+            },
+            {
+              "FROM": "19:00",
+              "TO": "21:30"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        }
+      },
+      "3b066366-c857-4222-a2b4-e753936e4d74": {
+        "TECHNICIAN_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "06:00",
+              "TO": "13:00"
+            },
+            {
+              "FROM": "14:30",
+              "TO": "15:30"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "15:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "18:30",
+              "TO": "19:30"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "09:00",
+              "TO": "17:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "08:00",
+              "TO": "15:00"
+            },
+            {
+              "FROM": "20:00",
+              "TO": "21:00"
+            }
+          ],
+          "SATURDAY": [],
+          "SUNDAY": []
+        }
+      }
+    },
+    "ORGANIZATION": "MEDUTILS"
+  },
+  "HEALTHPRODS": {
+    "ACL": {
+      "16746338-5570-477a-b05b-8664a1c7cce3": {
+        "TECHNICIAN_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "06:00",
+              "TO": "13:00"
+            },
+            {
+              "FROM": "16:30",
+              "TO": "17:30"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "11:00",
+              "TO": "19:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "18:30",
+              "TO": "19:30"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "09:00",
+              "TO": "17:00"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "08:30",
+              "TO": "15:00"
+            },
+            {
+              "FROM": "19:00",
+              "TO": "21:30"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "11:00",
+              "TO": "19:00"
+            }
+          ],
+          "SUNDAY": []
+        }
+      },
+      "3b066366-c857-4222-a2b4-e753936e4d74": {
+        "TECHNICIAN_WORK_SHIFT": {
+          "MONDAY": [
+            {
+              "FROM": "08:00",
+              "TO": "15:00"
+            },
+            {
+              "FROM": "15:30",
+              "TO": "16:30"
+            }
+          ],
+          "TUESDAY": [
+            {
+              "FROM": "08:00",
+              "TO": "16:00"
+            }
+          ],
+          "WEDNESDAY": [
+            {
+              "FROM": "07:00",
+              "TO": "14:00"
+            },
+            {
+              "FROM": "20:30",
+              "TO": "21:30"
+            }
+          ],
+          "THURSDAY": [
+            {
+              "FROM": "10:30",
+              "TO": "18:30"
+            }
+          ],
+          "FRIDAY": [
+            {
+              "FROM": "08:30",
+              "TO": "15:00"
+            },
+            {
+              "FROM": "19:00",
+              "TO": "21:30"
+            }
+          ],
+          "SATURDAY": [
+            {
+              "FROM": "08:30",
+              "TO": "15:30"
+            },
+            {
+              "FROM": "19:00",
+              "TO": "21:00"
+            }
+          ],
+          "SUNDAY": []
+        }
+      }
+    },
+    "ORGANIZATION": "HEALTHPRODS"
+  }
+}

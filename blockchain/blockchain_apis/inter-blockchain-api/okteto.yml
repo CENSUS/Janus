@@ -1,0 +1,8 @@
+name: interblockchain-api
+image: okteto/node:14
+command: bash
+namespace: melity
+sync:
+  - .:/usr/src/app
+forward:
+  - 4120:4120

@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: general-hospital-of-athens-medical-admin-cli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: general-hospital-of-athens-medical-admin-cli
+  template:
+    metadata:
+      labels:
+        app: general-hospital-of-athens-medical-admin-cli
+    spec:
+      containers:
+        - name: main
+          image: hyperledger/fabric-tools:{{FABRIC_VERSION}}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: FABRIC_CFG_PATH
+              value: /var/hyperledger/fabric/config/medical
+            - name: CORE_PEER_MSPCONFIGPATH
+              value: /var/hyperledger/fabric/organizations/peerOrganizations/general-hospital-of-athens/users/gehoat-generaladmin@general-hospital-of-athens/msp
+            - name: CORE_PEER_TLS_ROOTCERT_FILE
+              value: /var/hyperledger/fabric/organizations/peerOrganizations/general-hospital-of-athens/msp/tlscacerts/ca-general-hospital-of-athens.pem
+          args:
+            - sleep
+            - "2147483647"
+          workingDir: /root
+          volumeMounts:
+            - name: fabric-volume
+              mountPath: /var/hyperledger
+            - name: fabric-config
+              mountPath: /var/hyperledger/fabric/config/medical
+
+      # This init container will unfurl all of the MSP archives listed in the msp-config config map.
+      initContainers:
+        - name: msp-unfurl
+          image: busybox
+          command:
+            - sh
+            - -c
+            - "for msp in $(ls /msp/medical/msp-*.tgz); do echo $msp && tar zxvf $msp -C /var/hyperledger/fabric; done"
+          volumeMounts:
+            - name: msp-config
+              mountPath: /msp/medical
+            - name: fabric-volume
+              mountPath: /var/hyperledger
+      volumes:
+        - name: fabric-volume
+          persistentVolumeClaim:
+            claimName: disk-claim-general-hospital-of-athens
+        - name: fabric-config
+          configMap:
+            name: general-hospital-of-athens-medical-config
+        - name: msp-config
+          configMap:
+            name: msp-config-medical

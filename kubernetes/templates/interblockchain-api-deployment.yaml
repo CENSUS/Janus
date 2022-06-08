@@ -1,0 +1,130 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    run: interblockchain-api
+  name: interblockchain-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      run: interblockchain-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        run: interblockchain-api
+    spec:
+      containers:
+        - name: main
+          image: inter_blockchain_api
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4120
+          env:
+            - name: attikon_hospital_peer0_fabric_config
+              valueFrom:
+                configMapKeyRef:
+                  name: app-fabric-attikon-hospital-peer0-v1-map-interbc
+                  key: attikon-hospital-peer0_fabric_data.json
+            - name: general_hospital_of_athens_peer0_fabric_config
+              valueFrom:
+                configMapKeyRef:
+                  name: app-fabric-general-hospital-of-athens-peer0-v1-map-interbc
+                  key: general-hospital-of-athens-peer0_fabric_data.json
+            - name: medutils_peer0_fabric_config
+              valueFrom:
+                configMapKeyRef:
+                  name: app-fabric-medutils-peer0-v1-map-interbc
+                  key: medutils-peer0_fabric_data.json
+            - name: healthprods_peer0_fabric_config
+              valueFrom:
+                configMapKeyRef:
+                  name: app-fabric-healthprods-peer0-v1-map-interbc
+                  key: healthprods-peer0_fabric_data.json
+          volumeMounts:
+            - name: fabric-peers
+              mountPath: /fabric/application/peers
+            - name: fabricids
+              mountPath: /fabric/application/wallet
+            - name: fabric-ccp
+              mountPath: /fabric/application/gateways
+            - name: tlscerts-attikon-hospital
+              mountPath: /fabric/tlscacerts/attikon-hospital
+            - name: tlscerts-general-hospital-of-athens
+              mountPath: /fabric/tlscacerts/general-hospital-of-athens
+            - name: tlscerts-medutils
+              mountPath: /fabric/tlscacerts/medutils
+            - name: tlscerts-healthprods
+              mountPath: /fabric/tlscacerts/healthprods
+            - name: rabbitmq-queues-config
+              mountPath: "/rabbitmq"
+              readOnly: true
+            - name: rabbitmq-settings
+              mountPath: "/rabbitmq-settings"
+              readOnly: true
+            - name: tls-config
+              mountPath: /application/etc/ssl
+              readOnly: true
+      restartPolicy: Always
+      serviceAccountName: ""
+      volumes:
+        - name: fabric-peers
+          configMap:
+            name: app-fabric-peers-interbc-v1-map
+        - name: fabric-ccp
+          configMap:
+            name: app-fabric-ccp-interbc-v1-map
+        - name: fabricids
+          configMap:
+            name: app-fabric-ids-interbc-v1-map
+        - name: tlscerts-attikon-hospital
+          configMap:
+            name: app-fabric-tls-attikon-hospital-interbc-v1-map
+        - name: tlscerts-general-hospital-of-athens
+          configMap:
+            name: app-fabric-tls-general-hospital-of-athens-interbc-v1-map
+        - name: tlscerts-medutils
+          configMap:
+            name: app-fabric-tls-medutils-interbc-v1-map
+        - name: tlscerts-healthprods
+          configMap:
+            name: app-fabric-tls-healthprods-interbc-v1-map
+        - name: tls-config
+          secret:
+            secretName: interbc-api-tls
+            items:
+              - key: ca.crt
+                path: ca.crt
+              - key: tls.crt
+                path: tls.crt
+              - key: tls.key
+                path: tls.key
+        - name: rabbitmq-queues-config
+          configMap:
+            name: rabbitmq-queues-config
+            items:
+              - key: "proxy-config.json"
+                path: "proxy-config.json"
+              - key: "interbc-config.json"
+                path: "interbc-config.json"
+        - name: rabbitmq-settings
+          configMap:
+            name: app-rabbitmq-settings-interblockchain-api-v1-map
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    run: interblockchain-api
+  name: interblockchain-api
+spec:
+  ports:
+    - protocol: TCP
+      port: 4120
+      targetPort: 4120
+  selector:
+    run: interblockchain-api
+status:
+  loadBalancer: {}

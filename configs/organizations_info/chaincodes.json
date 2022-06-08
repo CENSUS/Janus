@@ -1,0 +1,197 @@
+{
+    "PROXY": [
+        {
+            "CC_NAME": "PSC",
+            "CC_LABEL": "PSC_1.0",
+            "CC_IMAGE": "psc",
+            "CC_VERSION": "1",
+            "CC_SEQUENCE": "1",
+            "CC_END_POLICY": "AND('AttikonhospitalMSP.peer','GeneralhospitalofathensMSP.peer','MedutilsMSP.peer','HealthprodsMSP.peer')",
+            "PRIVATE_COLLECTION_NAME": "psc-private-data-collection.json",
+            "INIT_REQUIRED": "",
+            "CC_INIT_FCN": "",
+            "CC_INIT_DATA": "",
+            "DEPLOYMENT_CUSTOM_ENV_TEMPLATE": "",
+            "POLICY_ORGS": [
+                "attikon-hospital-peer0@attikon-hospital",
+                "general-hospital-of-athens-peer0@general-hospital-of-athens",
+                "medutils-peer0@medutils",
+                "healthprods-peer0@healthprods"
+            ],
+            "CC_ORGANIZATIONS": [
+                "attikon-hospital",
+                "general-hospital-of-athens",
+                "medutils",
+                "healthprods"
+            ],
+            "MINISTRY_TLS_REQUIRED": false,
+            "MINISTRY_TLS_CA": "",
+            "MINISTRY_TLS_CA_CREDS": ""
+        },
+        {
+            "CC_NAME": "LSC",
+            "CC_LABEL": "LSC_1.0",
+            "CC_IMAGE": "lsc",
+            "CC_VERSION": "1",
+            "CC_SEQUENCE": "1",
+            "CC_END_POLICY": "AND('AttikonhospitalMSP.peer','GeneralhospitalofathensMSP.peer','MedutilsMSP.peer','HealthprodsMSP.peer')",
+            "PRIVATE_COLLECTION_NAME": "",
+            "INIT_REQUIRED": "",
+            "CC_INIT_FCN": "",
+            "CC_INIT_DATA": "",
+            "DEPLOYMENT_CUSTOM_ENV_TEMPLATE": "",
+            "POLICY_ORGS": [
+                "attikon-hospital-peer0@attikon-hospital",
+                "general-hospital-of-athens-peer0@general-hospital-of-athens",
+                "medutils-peer0@medutils",
+                "healthprods-peer0@healthprods"
+            ],
+            "CC_ORGANIZATIONS": [
+                "attikon-hospital",
+                "general-hospital-of-athens",
+                "medutils",
+                "healthprods"
+            ],
+            "MINISTRY_TLS_REQUIRED": false,
+            "MINISTRY_TLS_CA": "",
+            "MINISTRY_TLS_CA_CREDS": ""
+        },
+        {
+            "CC_NAME": "TMSC",
+            "CC_LABEL": "TMSC_1.0",
+            "CC_IMAGE": "tmsc",
+            "CC_VERSION": "1",
+            "CC_SEQUENCE": "1",
+            "CC_END_POLICY": "AND('AttikonhospitalMSP.peer','GeneralhospitalofathensMSP.peer','MedutilsMSP.peer','HealthprodsMSP.peer')",
+            "PRIVATE_COLLECTION_NAME": "",
+            "INIT_REQUIRED": "--init-required",
+            "CC_INIT_FCN": "initLedger",
+            "CC_INIT_DATA": [
+                "attikon-hospital@AttikonhospitalMSP@medical",
+                "general-hospital-of-athens@GeneralhospitalofathensMSP@medical",
+                "medutils@MedutilsMSP@manufacturer",
+                "healthprods@HealthprodsMSP@manufacturer"
+            ],
+            "DEPLOYMENT_CUSTOM_ENV_TEMPLATE": "",
+            "POLICY_ORGS": [
+                "attikon-hospital-peer0@attikon-hospital",
+                "general-hospital-of-athens-peer0@general-hospital-of-athens",
+                "medutils-peer0@medutils",
+                "healthprods-peer0@healthprods"
+            ],
+            "CC_ORGANIZATIONS": [
+                "attikon-hospital",
+                "general-hospital-of-athens",
+                "medutils",
+                "healthprods"
+            ],
+            "MINISTRY_TLS_REQUIRED": false,
+            "MINISTRY_TLS_CA": "",
+            "MINISTRY_TLS_CA_CREDS": ""
+        }
+    ],
+    "MEDICAL": [
+        {
+            "CC_NAME": "KSSC",
+            "CC_LABEL": "KSSC_1.0",
+            "CC_IMAGE": "kssc",
+            "CC_VERSION": "1",
+            "CC_SEQUENCE": "1",
+            "CC_END_POLICY": "OR('AttikonhospitalMSP.peer','GeneralhospitalofathensMSP.peer')",
+            "PRIVATE_COLLECTION_NAME": "",
+            "INIT_REQUIRED": "",
+            "CC_INIT_FCN": "",
+            "CC_INIT_DATA": "",
+            "DEPLOYMENT_CUSTOM_ENV_TEMPLATE": "kssc-template",
+            "POLICY_ORGS": [
+                "attikon-hospital-peer0-medical@attikon-hospital",
+                "general-hospital-of-athens-peer0-medical@general-hospital-of-athens"
+            ],
+            "CC_ORGANIZATIONS": [
+                "attikon-hospital",
+                "general-hospital-of-athens"
+            ],
+            "ABE_PLUGIN_DOMAIN": "stakeholders_abe_engine",
+            "MINISTRY_TLS_REQUIRED": true,
+            "MINISTRY_TLS_CA": "ca-ministry-of-health",
+            "MINISTRY_TLS_CA_CREDS": "tlsadminmoh:tlsadminmohpw"
+        },
+        {
+            "CC_NAME": "ACSC",
+            "CC_LABEL": "ACSC_1.0",
+            "CC_IMAGE": "acsc",
+            "CC_VERSION": "1",
+            "CC_SEQUENCE": "1",
+            "CC_END_POLICY": "OR('AttikonhospitalMSP.peer','GeneralhospitalofathensMSP.peer')",
+            "PRIVATE_COLLECTION_NAME": "",
+            "INIT_REQUIRED": "",
+            "CC_INIT_FCN": "",
+            "CC_INIT_DATA": "",
+            "DEPLOYMENT_CUSTOM_ENV_TEMPLATE": "",
+            "POLICY_ORGS": [
+                "attikon-hospital-peer0-medical@attikon-hospital",
+                "general-hospital-of-athens-peer0-medical@general-hospital-of-athens"
+            ],
+            "CC_ORGANIZATIONS": [
+                "attikon-hospital",
+                "general-hospital-of-athens"
+            ],
+            "ABE_PLUGIN_DOMAIN": "stakeholders_abe_engine",
+            "MINISTRY_TLS_REQUIRED": false,
+            "MINISTRY_TLS_CA": "",
+            "MINISTRY_TLS_CA_CREDS": ""
+        }
+    ],
+    "MANUFACTURER": [
+        {
+            "CC_NAME": "KSSC",
+            "CC_LABEL": "KSSC_1.0",
+            "CC_IMAGE": "kssc",
+            "CC_VERSION": "1",
+            "CC_SEQUENCE": "1",
+            "CC_END_POLICY": "OR('MedutilsMSP.peer','HealthprodsMSP.peer')",
+            "PRIVATE_COLLECTION_NAME": "",
+            "INIT_REQUIRED": "",
+            "CC_INIT_FCN": "",
+            "CC_INIT_DATA": "",
+            "DEPLOYMENT_CUSTOM_ENV_TEMPLATE": "kssc-template",
+            "POLICY_ORGS": [
+                "medutils-peer0-manufacturer@medutils",
+                "healthprods-peer0-manufacturer@healthprods"
+            ],
+            "CC_ORGANIZATIONS": [
+                "medutils",
+                "healthprods"
+            ],
+            "ABE_PLUGIN_DOMAIN": "stakeholders_abe_engine",
+            "MINISTRY_TLS_REQUIRED": true,
+            "MINISTRY_TLS_CA": "ca-ministry-of-health",
+            "MINISTRY_TLS_CA_CREDS": "tlsadminmoh:tlsadminmohpw"
+        },
+        {
+            "CC_NAME": "ACSC",
+            "CC_LABEL": "ACSC_1.0",
+            "CC_IMAGE": "acsc",
+            "CC_VERSION": "1",
+            "CC_SEQUENCE": "1",
+            "CC_END_POLICY": "OR('MedutilsMSP.peer','HealthprodsMSP.peer')",
+            "PRIVATE_COLLECTION_NAME": "",
+            "INIT_REQUIRED": "",
+            "CC_INIT_FCN": "",
+            "CC_INIT_DATA": "",
+            "DEPLOYMENT_CUSTOM_ENV_TEMPLATE": "",
+            "POLICY_ORGS": [
+                "medutils-peer0-manufacturer@medutils",
+                "healthprods-peer0-manufacturer@healthprods"
+            ],
+            "CC_ORGANIZATIONS": [
+                "medutils",
+                "healthprods"
+            ],
+            "ABE_PLUGIN_DOMAIN": "stakeholders_abe_engine",
+            "MINISTRY_TLS_REQUIRED": false,
+            "MINISTRY_TLS_CA": "",
+            "MINISTRY_TLS_CA_CREDS": ""
+        }
+    ]
+}

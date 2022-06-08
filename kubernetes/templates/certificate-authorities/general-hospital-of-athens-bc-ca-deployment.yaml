@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ca-general-hospital-of-athens
+  labels:
+    app: ca-general-hospital-of-athens
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ca-general-hospital-of-athens
+  template:
+    metadata:
+      labels:
+        app: ca-general-hospital-of-athens
+    spec:
+      volumes:
+        - name: ca-config
+          configMap:
+            name: ca-config-general-hospital-of-athens
+        - name: ca-files
+          persistentVolumeClaim:
+            claimName: disk-claim-general-hospital-of-athens
+
+      containers:
+        - name: main
+          image: hyperledger/fabric-ca:1.5.2
+          env:
+            - name: FABRIC_CA_SERVER_HOME
+              value: "/var/hyperledger/ca-general-hospital-of-athens-server"
+            - name: FABRIC_CA_CLIENT_HOME
+              value: "/var/hyperledger/ca-general-hospital-of-athens-client"
+            # - name: FABRIC_CA_SERVER_TLS_CERTFILE
+            #   value: "/var/hyperledger/ca-general-hospital-of-athens-client/tls-ca/rcadminorg1/msp/signcerts/cert.pem"
+            # - name: FABRIC_CA_SERVER_TLS_KEYFILE
+            #   value: "/var/hyperledger/ca-general-hospital-of-athens-client/tls-ca/rcadminorg1/msp/keystore/key.pem"
+            - name: FABRIC_CA_SERVER_DEBUG
+              value: "true"
+            - name: GODEBUG
+              value: "netdns=go"
+          volumeMounts:
+            - name: ca-files
+              mountPath: /var/hyperledger
+            - name: ca-config
+              mountPath: /var/hyperledger/ca-general-hospital-of-athens-server/fabric-ca-server-config.yaml
+              subPath: ca-config-general-hospital-of-athens.yaml
+          ports:
+            - containerPort: 443
+          # readinessProbe:
+          #   tcpSocket:
+          #     port: 443
+          #   initialDelaySeconds: 2
+          #   periodSeconds: 5
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ca-general-hospital-of-athens
+  labels:
+    app: ca-general-hospital-of-athens
+spec:
+  selector:
+    app: ca-general-hospital-of-athens
+  ports:
+    - protocol: TCP
+      port: 443
+      targetPort: 443

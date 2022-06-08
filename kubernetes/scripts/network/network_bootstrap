@@ -1,0 +1,17 @@
+(./network melity destroy && ./network proxy up &&
+    ./network proxy ingress up &&
+    ./network proxy vault &&
+    ./network proxy channel create &&
+    ./network proxy chaincode deploy &&
+    ./network medical up &&
+    ./network medical channel create &&
+    ./network medical chaincode deploy &&
+    ./network manufacturer up &&
+    ./network manufacturer channel create &&
+    ./network manufacturer chaincode deploy &&
+    ./network proxy rabbitmq &&
+    ./network proxy dbapis &&
+    ./network proxy backend &&
+    ./network proxy interbc &&
+    ./network proxy clients &&
+    ./network proxy clientapp)
