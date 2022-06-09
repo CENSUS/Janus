@@ -325,7 +325,7 @@ async def get_disease(uuid: UUID4 = Body(..., embed=True),
 
 
 @router.post("/disease/stats",
-             response_model=schemas.Disease_Stats)
+             response_model=schemas.Disease_Stats, response_model_exclude_unset=True)
 async def get_disease_stats(disease_request: schemas.DiseaseStatsRequest,
                             db: Session = Depends(get_db)):
     if (disease_request.end_date and
@@ -483,22 +483,36 @@ async def get_medical_device(device: schemas.DeviceRequest,
         status_code=400, detail="No Identification field provided.")
 
 
-@router.post("/device/is_owned", response_model=schemas.MedicalDeviceOwned,
+@router.post("/device/is_owned", response_model=schemas.MedicalDevicesOwned,
              response_model_exclude_unset=True)
 async def get_medical_device_owned(deviceReq: schemas.DeviceRequest,
                                    db: Session = Depends(get_db)):
     if deviceReq.uuid:
-        device = crud.get_medical_device_by_serial(db, deviceReq.serial)
+        devices = [crud.get_medical_device_by_serial(db, deviceReq.serial)]
     elif deviceReq.model:
-        device = crud.get_medical_device_by_model(db, deviceReq.model)
+        devices = crud.get_medical_devices_by_model(db, deviceReq.model)
 
-    if not device:
-        return {"is_owned": False}
+    if not devices:
+        return {
+            "is_owned": False
+        }
     else:
+        available_devices = []
+
+        for device in devices:
+            device_item = {
+                "clinic_name": device.clinic.name,
+                "clinic_uuid": device.clinic.uuid,
+                "clinic_address": device.clinic.address,
+                "device_serial": device.serial,
+                "device_manufacturer": device.manufacturer,
+            }
+            available_devices.append(device_item)
+
         return {
             "is_owned": True,
-            "clinic_name": device.clinic.name,
-            "clinic_address": device.clinic.address
+            "total_devices": len(devices),
+            "devices": available_devices
         }
 
 @router.post("/device/last_maintenance", response_model=schemas.Maintenance)

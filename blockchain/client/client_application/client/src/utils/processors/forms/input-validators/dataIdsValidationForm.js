@@ -28,10 +28,7 @@ const DATA_02ValidationForm = {
 
 const DATA_03ValidationForm = {
     uuid: yup.string().uuid("Invalid input").required("A UUID is required"),
-    clinic_uuid: yup
-        .string()
-        .uuid("Invalid input")
-        .required("A Clinic UUID is required"),
+    clinic_uuid: yup.string().uuid("Invalid UUID").notRequired(),
 };
 
 const DATA_04ValidationForm = {

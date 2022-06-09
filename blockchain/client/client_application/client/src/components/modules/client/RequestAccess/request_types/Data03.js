@@ -54,7 +54,8 @@ const DataForm = (props) => {
                     <Divider />
                     <TextField
                         id="clinic_uuid"
-                        label="Clinic UUID"
+                        label="Clinic UUID (Optional)"
+                        required={false}
                         value={values.clinic_uuid}
                         onChange={handleChange}
                         onBlur={handleBlur}

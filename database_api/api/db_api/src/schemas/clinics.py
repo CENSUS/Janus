@@ -163,6 +163,7 @@ class DiseaseStatsRequest(DateRangeRequest):
 class Disease_Stats(BaseModel):
 
     number_of_cases: int
+    clinic_uuid: Optional[UUID4]
 
 
 class Diagnosis(UUIDSchema):
@@ -220,13 +221,19 @@ class Medical_Device(UUIDSchema):
     next_required_maintenance_date: date
     clinic_uuid: UUID4
 
-
 class MedicalDeviceOwned(BaseModel):
 
-    is_owned: bool
     clinic_name: Optional[str]
+    clinic_uuid: Optional[UUID4]
     clinic_address: Optional[str]
+    device_serial: Optional[str]
+    device_manufacturer: Optional[str]
 
+class MedicalDevicesOwned(BaseModel):
+
+    is_owned: bool
+    total_devices: Optional[int]
+    devices: Optional[List[MedicalDeviceOwned]]
 
 class Maintenance(IDSchema):
 
