@@ -250,17 +250,15 @@ async def get_incident(id: int = Body(..., embed=True),
                        db: Session = Depends(get_db)):
     return crud.get_incident(db, id)
 
+@router.post("/incident/stats/reports",
+             response_model=schemas.Model_Incident_Stats)
+async def get_model_incidents_reports(uuid: str = Body(..., embed=True),
+                                   db: Session = Depends(get_db)):
+    return crud.get_model_incidents_reports(db, uuid)
 
 @router.post("/incident/stats/model",
-             response_model=schemas.Model_Incident_Stats)
+             response_model=schemas.Model_Incident_Stats,
+             response_model_exclude_unset=True)
 async def get_model_incident_stats(uuid: str = Body(..., embed=True),
                                    db: Session = Depends(get_db)):
-                                   
-    # _incident = crud.get_model_incidents_stats(db, uuid)
-    # incident_model = schemas.Incident.from_orm(_incident)
-    # group_incident_model = schemas.Group_Incident.from_orm(_incident.grouped_incident)
-
-    # return {'incidents': {**incident_model.dict(),
-    # **group_incident_model.dict()}}
-
     return crud.get_model_incidents_stats(db, uuid)

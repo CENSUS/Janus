@@ -122,6 +122,47 @@ def get_incidents(db: Session):
 def get_incident(db: Session, incident_id: int):
     return get_by_id(db, models.Incident, incident_id)
 
+def get_model_incidents_reports(db: Session, model_uuid: UUID4):
+
+    model_query = db.query(models.Manufactured_Device).filter_by(
+        device_model_uuid=model_uuid)
+    incidents_query = model_query.join(
+            models.Incident)
+    distinct_incidents_query = incidents_query.group_by(models.Manufactured_Device.uuid)
+
+    total_devices = model_query.count()
+    if not total_devices:
+        return None
+    total_model_incidents = incidents_query.count()
+
+    distinct_model_incidents = distinct_incidents_query.count()
+
+    distinct_incidents_reports = distinct_incidents_query.all()
+
+    response_incidents = []
+
+    for report in (distinct_incidents_reports):
+        incidents = report.incidents
+
+        for incident in incidents:
+            grouped_incident = incident.grouped_incident
+
+            incident_response = {
+                'incident_id': incident.id,
+                'device_serial': incident.device_serial,
+                'time': incident.time,
+                'report_path': grouped_incident.report_path,
+                'description': grouped_incident.description,
+                'wrapped_encryption_key': grouped_incident.wrapped_encryption_key
+            }
+            response_incidents.append(incident_response)
+
+    return {'total_devices': total_devices,
+            'total_model_incidents': total_model_incidents,
+            'distinct_model_incidents': distinct_model_incidents,
+            'incident_reports': response_incidents
+        }
+
 
 def get_model_incidents_stats(db: Session, model_uuid: UUID4):
 
@@ -140,3 +181,4 @@ def get_model_incidents_stats(db: Session, model_uuid: UUID4):
     return {'total_devices': total_devices,
             'total_model_incidents': total_model_incidents,
             'distinct_model_incidents': distinct_model_incidents}
+

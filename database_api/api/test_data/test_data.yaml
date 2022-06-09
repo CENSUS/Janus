@@ -943,6 +943,18 @@ medutils:
       device_serial: *serial_01
       description: "description for incident_02"
       report_path: "/tmp/report_02.txt"
+    incident_03:
+      id: 3
+      time: "2019-04-14 17:21"
+      device_serial: *serial_00
+      description: "description for incident_03"
+      report_path: "/tmp/report_03.txt"
+    incident_04:
+      id: 4
+      time: "2019-05-16 18:23"
+      device_serial: *serial_00
+      description: "description for incident_04"
+      report_path: "/tmp/report_04.txt"
 
 healthprods:
   type: "manufacturing"
@@ -1036,19 +1048,19 @@ healthprods:
 
   incidents:
     incident_10:
-      id: 3
+      id: 5
       time: "2019-08-12 12:08"
       device_serial: *serial_10
-      description: "description for incident_00"
+      description: "description for incident_10"
       report_path: "/tmp/report_10.txt"
     incident_11:
-      id: 4
+      id: 6
       time: "2019-01-09 11:01"
       device_serial: *serial_11
       description: "description for incident_11"
       report_path: "/tmp/report_11.txt"
     incident_12:
-      id: 5
+      id: 7
       time: "2019-12-17 07:12"
       device_serial: *serial_10
       description: "description for incident_12"

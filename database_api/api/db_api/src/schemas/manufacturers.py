@@ -1,6 +1,6 @@
 from datetime import date, datetime
 from pydantic import UUID4, BaseModel
-from typing import Dict, Optional
+from typing import List, Dict, Optional
 
 from .common import UUIDSchema, IDSchema, GUIDSchema
 
@@ -53,7 +53,6 @@ class Incident(IDSchema):
     # report_path: str
 
 class IncidentResponse(IDSchema):
-
     device_serial: str
     time: datetime
     # Sensitive/Resticted Data
@@ -69,14 +68,26 @@ class Group_Incident(IDSchema):
     report_path: str
     wrapped_encryption_key: str
 
+class Model_Grouped_Incident_Stats(BaseModel):
+
+    incident_id: int
+    device_serial: str
+    time: datetime
+    report_path: str
+    description: str
+    wrapped_encryption_key: str
+
 class Model_Incident_Stats(BaseModel):
 
     total_devices: int
     distinct_model_incidents: int = 0
     total_model_incidents: int = 0
+    incident_reports: Optional[List[Model_Grouped_Incident_Stats]]
 
 class Device_Firmware_Check(BaseModel):
 
     is_up_to_date: bool
     latest_firmware: UUID4
     current_firmware: UUID4
+
+
