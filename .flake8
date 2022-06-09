@@ -1,0 +1,16 @@
+[flake8]
+format = pylint
+count = True
+max-line-length = 80
+ignore = 
+    E402
+    E711
+exclude =
+    .git,
+    __pycache__,
+    docs/*
+    databases,
+    .vscode,
+    __init__.py
+filename = *.py
+statistics = True

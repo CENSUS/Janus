@@ -193,7 +193,12 @@ def get_disease_stats(db: Session, disease_request=schemas.DiseaseStatsRequest):
     else:
         number_of_cases = treatments.count()
 
-    return {'number_of_cases': number_of_cases}
+    response_data = {'number_of_cases': number_of_cases}
+
+    if clinic_uuid is not None:
+        response_data['clinic_uuid'] = clinic_uuid
+
+    return response_data
 
 
 ###############################################################################
@@ -258,8 +263,10 @@ def get_medical_device(db: Session, device_uuid: UUID4):
 def get_medical_device_by_serial(db: Session, serial: str):
     return db.query(models.Medical_Device).filter_by(serial=serial).first()
 
-def get_medical_device_by_model(db: Session, model: str):
-    return db.query(models.Medical_Device).filter_by(model=model).first()
+
+def get_medical_devices_by_model(db: Session, model: str):
+    return db.query(models.Medical_Device).filter_by(model=model).all()
+
 
 ###############################################################################
 # /device_maintenance

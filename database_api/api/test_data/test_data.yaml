@@ -523,6 +523,15 @@ attikon-hospital:
       next_required_maintenance_date: "2021-07-18"
       last_maintenance_id:
       clinic_uuid: *clinic_0
+    device_12:
+      uuid: &device_12 "1dc492d9-f5f3-4396-a4e4-1216b54431b4"
+      serial: "serial_12"
+      manufacturer: *medutils
+      model: "model_00"
+      install_date: "2018-07-18"
+      next_required_maintenance_date: "2021-07-18"
+      last_maintenance_id:
+      clinic_uuid: *clinic_1
     device_10:
       uuid: &device_10 "d187fa6a-8afa-4f10-b113-741841abb875"
       serial: "serial_10"
@@ -836,6 +845,12 @@ medutils:
       device_type: "type 00"
       shipped_firmware_uuid: *firmware_00
       latest_firmware_available_uuid: *firmware_01
+    device_model_12:
+      uuid: &device_model_12 "ed2d9732-9a2e-42ab-98ff-94e3fe4d60b4"
+      name: "model_00"
+      device_type: "type 00"
+      shipped_firmware_uuid: *firmware_01
+      latest_firmware_available_uuid: *firmware_01
     device_model_01:
       uuid: &device_model_01 "d51091a2-349e-4b79-8b09-1b45614d6837"
       name: "model_01"
@@ -849,6 +864,11 @@ medutils:
       device_model_uuid: *device_model_00
       serial: &serial_00 "serial_00"
       current_firmware_uuid: *firmware_00
+    device_12:
+      uuid: *device_12
+      device_model_uuid: *device_model_12
+      serial: &serial_12 "serial_12"
+      current_firmware_uuid: *firmware_01
     device_01:
       uuid: *device_01
       serial: &serial_01 "serial_01"

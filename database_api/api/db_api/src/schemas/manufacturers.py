@@ -53,6 +53,7 @@ class Incident(IDSchema):
     # report_path: str
 
 class IncidentResponse(IDSchema):
+
     device_serial: str
     time: datetime
     # Sensitive/Resticted Data
@@ -73,3 +74,9 @@ class Model_Incident_Stats(BaseModel):
     total_devices: int
     distinct_model_incidents: int = 0
     total_model_incidents: int = 0
+
+class Device_Firmware_Check(BaseModel):
+
+    is_up_to_date: bool
+    latest_firmware: UUID4
+    current_firmware: UUID4

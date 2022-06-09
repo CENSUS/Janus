@@ -202,7 +202,7 @@ async def get_unpatched_devices(db: Session = Depends(get_db)):
     return crud.get_unpatched_devices(db)
 
 
-@router.post("/device/is_firmware_up_to_date", response_model=bool)
+@router.post("/device/is_firmware_up_to_date", response_model=schemas.Device_Firmware_Check)
 async def is_device_patched(device: schemas.DeviceRequest,
                             db: Session = Depends(get_db)):
     _device = await get_device(device=device, db=db)
@@ -210,8 +210,13 @@ async def is_device_patched(device: schemas.DeviceRequest,
         return None
 
     model = _device.model
+    is_up_to_date = _device.current_firmware_uuid == model.latest_firmware_available_uuid
 
-    return _device.current_firmware_uuid == model.latest_firmware_available_uuid
+    return {
+        "is_up_to_date": is_up_to_date,
+        "latest_firmware": _device.current_firmware_uuid,
+        "current_firmware": model.latest_firmware_available_uuid
+    }
 
 
 @router.get("/device/incidents",
