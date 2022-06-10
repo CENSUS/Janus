@@ -11,7 +11,7 @@ a domain-wide access policy.
 The platform is based on an HMBAC (hierarchical multi-blockchain access control) system, where subjects
 use ABE (Attribute-Based Encryption) keys to gain access to information. Please note that subject access to the platform
 requires user authentication through credentials that are not related
-to the ABE keys, and which can be easily revoked if required. The following 
+to the ABE keys, and which can be easily revoked if required. The following
 diagram provides a high level overview of the platform.
 
 ![HMBAC_DIAGRAM](docs/images/hmbac-drawing.png "Janus HMBAC Diagram")
@@ -31,9 +31,6 @@ an additional blockchain is introduced to track requests regardless
 of the domain this was initiated upon. This extra blockchain also tracks
 membership-related information of the aforementioned ecosystem.
 
-The **Janus** project is a reference implementation of the platform proposed
-in the ["A hierarchical multi blockchain for fine
-grained access to medical data"](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=9146294) paper by Vangelis Malamas, Panayiotis Kotzanikolaou, Thomas K. Dasaklis and Mike Burmester.
 CENSUS was tasked with the implementation of this
 platform as part of the "MELITY" national research project (ΜΕΛΙΤΥ,
 Κωδικός Έργου: Τ1ΕΔΚ-01958, Δράση “Ερευνώ – Δημιουργώ – Καινοτομώ”
