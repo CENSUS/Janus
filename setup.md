@@ -6,18 +6,20 @@ Installation instructions for the Janus project
 
 # Dependencies
 
-| Operating System                |
-| ------------------------------- |
-| Ubuntu Focal (20.04)            |
+| Operating System     |
+| -------------------- |
+| Ubuntu Focal (20.04) |
 
 | Dependencies                    | Dependencies |
 | ------------------------------- | ------------ |
 | Kubernetes (MicroK8s) - v. 1.23 | NodeJS / NPM |
 | Docker                          | jq           |
-| Golang                          | Golang       |
+| Golang                          | Wine         |
 | make                            | pwgen        |
-| jq                              |              |
-| Wine                            |              |
+
+| ABE Dependencies                                                                                             |
+| ------------------------------------------------------------------------------------------------------------ |
+| vault-secrets-abe-janus ([Download Link](https://github.com/CENSUS/vault-secrets-abe-janus "Download Link")) |
 
 # Automatic Installation
 
@@ -238,7 +240,7 @@ This command will build a custom Vault image (_vault-abe_) (ABE Plugin is also i
 
 > Janus/kubernetes/scripts
 
-and for each Application/Chaincode, run: **./build_image.sh** *app_name*.
+and for each Application/Chaincode, run: **./build_image.sh** _app_name_.
 
 For example,
 
