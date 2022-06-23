@@ -21,6 +21,25 @@ Installation instructions for the Janus project
 | ------------------------------------------------------------------------------------------------------------ |
 | vault-secrets-abe-janus ([Download Link](https://github.com/CENSUS/vault-secrets-abe-janus "Download Link")) |
 
+# Platform's Ports
+
+By default, the Janus Platform exposes its services at these ports:
+
+| **HTTP** | **HTTPs** |
+| -------- | --------- |
+| 8080     | 6443      |
+
+You may change these ports by modifying the _network-config.json_ file that can be found at:
+
+> Janus/block/configs/network/**network-config.json**
+
+If you cannot reach the Janus Platform (APIs, Client Application etc.), then:
+
+- make sure that both the HTTP and the HTTPs ports are open (i.e. Port Forward, if needed)
+- the firewall allows connections to these ports
+
+However, if the ports are open and the host machine is configured appropriately but the Platform is still not accessible (e.g. cannot reach the APIs), check your NAT (i.e. allow NAT Reflection).
+
 # Automatic Installation
 
 Copy the following components inside the **same** folder (e.g. Project):
@@ -72,7 +91,7 @@ Upon complete installation, the application will be ready for use.
 
 # Access the Application
 
-You may access the Application with the Client Application that you may acquire by navigating to: _https://api.`PUBLIC_IP`.nip.io_.
+You may access the Application with the Client Application that you can acquire by navigating to: *https://api.**PUBLIC_IP**.nip.io[:**HTTPS_PORT**]*.
 
 ### Linux Client Application
 
@@ -255,11 +274,12 @@ If you want, **you may build all the Images automatically**, by running:
 Before proceeding with the Deployment of the Application, there are two more extremely important steps:
 
 1. Allow SSL termination at the Pods
-2. Define the Server's public IP (_only if you need a custom IP and DO NOT want to utilize the system's Public IP_)
+2. Modify the Ports of the Ingress
+3. Define the Server's public IP (_only if you need a custom IP and DO NOT want to utilize the system's Public IP_)
 
 #### Allow SSL termination at the Pods.
 
-Ingress is already initialized at Kubernetes. However, it does not support ssl-termination by default. There is a need to manually edit the _ingress config_ file, in order to support the termination of the SSL at the Pods.
+Ingress (an API that manages external traffic to the cluster) is already initialized in the Kubernetes. However, it does not support SSL-Termination by default. There is a need to manually edit the _ingress config_ file, in order to support the termination of the SSL at the Pods themselves.
 
 Follow the below steps:
 
@@ -273,7 +293,7 @@ You should see a file with the name: _nginx-ingress-microk8s-controller_ (namesp
 $ microk8s.kubectl edit daemonset nginx-ingress-microk8s-controller -n ingress
 ```
 
-Under _spec.template.spec.containers, update the \_args_ and **add**:
+Under _spec.template.spec.containers_, update the _args_ and **add**:
 
 ```bash
 --enable-ssl-passthrough
@@ -285,25 +305,35 @@ _In order to successfully edit the ingress configuration file_, you may need to 
 
     $ sudo apt install vim
 
+#### Modify the Ports of the Ingress
+
+By default, the Ingress listens to the ports: _[HTTP] 80 / [HTTPs] 443_ for connections.
+
+In order to modify these ports, follow the instructions:
+
+```
+$ microk8s.kubectl get daemonset --all-namespaces
+```
+
+You should see a file with the name: _nginx-ingress-microk8s-controller_ (namespace: _ingress_). Edit the file:
+
+```
+$ microk8s.kubectl edit daemonset nginx-ingress-microk8s-controller -n ingress
+```
+
+Under _spec.template.spec.containers_, modify the _ports_ field and **replace** the _hostPort_ of both the _http_ and the _https_ ports to the ports of your choice. **Do not** modify the _containerPort_ values.
+
+Save and close the file. The Ingress should now expose the Platform at the ports that you chose.
+
 #### Define the Server's public IP.
 
-**By default**, the Application and the Client Application point to the IP _`XXX.XXX.XXX.XXX`_.
+By default, the Platform and the Client Application point to the Public IP _`XXX.XXX.XXX.XXX`_.
 
-If you do not (manually) define the Public IP of your server, the project will automatically try to find it out and use it.
+If you do not (manually) define the Public IP of your machine, the project will automatically try to determine it and use it.
 
-However, you may manually update it (not suggested), by following the instructions:
+However, you may manually alter it, by modifying the _network-config.json_ [*PUBLIC_IP key*] file that can be found at:
 
-With a text editor find every entry that matches the _`XXX.XXX.XXX.XXX`_ IP and change it to the public IP of your server.
-
-E.g., if your current server exposes its services at: 111.222.333.444, you should change every entry that is identical to _`XXX.XXX.XXX.XXX`_, to _111.222.333.444_.
-
-**More specifically**, you must change the **INFRASTRUCTURE_ENDPOINT** variable, that you can find at:
-
-> /Janus/kubernetes/scripts/network/scripts/init_values.sh
-
-as well as every entry of _`XXX.XXX.XXX.XXX`_ that you will find at:
-
-> /Janus/blockchain/client/client_application
+> Janus/block/configs/network/**network-config.json**
 
 # Deploy the Application
 
@@ -319,7 +349,7 @@ and run:
  $ ./network_bootstraper
 ```
 
-The procedure needs (approximately) 20-25 minutes to complete.
+The procedure needs (approximately) 15-25 minutes to complete.
 At the end of the procedure, every Pod should be up and running on the Server.
 You can find out if everything is okay, by running:
 

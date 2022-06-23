@@ -80,6 +80,10 @@ function construct_backend_application_configmap() {
     local peer_ca_exposed=$(echo $EXPOSED_VALUE | cut -f1 -d/).${INFRASTRUCTURE_ENDPOINT}
     local peer_ca_port_exposed=$(echo $EXPOSED_VALUE | cut -f3 -d/)
 
+    if [[ -z "${peer_ca_port_exposed}" || "${peer_ca_port_exposed}" == "PORT" && "${peer_ca_port_exposed}" != "443" ]]; then
+      peer_ca_port_exposed=${INFRASTRUCTURE_HTTPS_PORT}
+    fi
+
     local reverse_peer_domain_info=$(define_domain_bc_peer_details ${peer_name})
 
     local reverse_domain_bc=$(echo $reverse_peer_domain_info | cut -f1 -d:)
@@ -172,7 +176,5 @@ function backend_application_connection() {
 
   kubectl -n $NS delete -f ${KUBE_TEMPLATES_DIR}/backend-api-deployment.yaml || log "Backend-API deployment not found - Applying..."
   kubectl -n $NS apply -f ${KUBE_TEMPLATES_DIR}/backend-api-deployment.yaml
-
-  # log kubectl -n $NS rollout status deploy/application-deployment
 
 }

@@ -13,13 +13,13 @@ The Benchmarking Tool can be found under:
 **To install the tool**, while inside the _measurements_ folder execute:
 
 ```bash
-npm install
+$ npm install
 ```
 
 **To execute the tool**, while inside the _measurements_ folder execute:
 
 ```
-node run.js
+$ node run.js
 ```
 
 By running the command found above, a selection menu will appear, prompting you to choose the way that you want to run the benchmarks.
@@ -44,7 +44,7 @@ You can redefine the data sent with each request id, by editing the file that ca
 
 ## How to view the benchmark's results
 
-You can view the benchmark's results at: _https://api.`PUBLIC_IP`.nip.io/benchmarks_
+You can view the benchmark's results at: https://api.**PUBLIC_IP**.nip.io[:**HTTPS_PORT**]/**benchmarks**
 
 ## How to create create multiple benchmarks?
 
@@ -55,35 +55,36 @@ Upon successful completion of all the 1.000 requests, the System will stop the (
 
 ## How to deactivate the Benchmarking Capabilities?
 
-In order to deactivate the Benchmarking Capabilities of the System, you should modify the configuration of the *Backend API*.
+In order to deactivate the Benchmarking Capabilities of the System, you should modify the configuration of the _Backend API_.
 
 The configuration can be found at:
 
 > Janus/blockchain/blockchain_apis/backend/config/main_config.js
 
-*main_config.js* includes:
+_main_config.js_ includes:
 
 `metrics: { metricsOn: true, cliLog: false, pageLog: true }`
 
-- *metricsOn*: Activates/Deactivates the Benchmarking Capabilities of the System
-- *cliLog*: Prints the Benchmark's information at the *Backend API*'s terminal (Pod)
-- *pageLog*: Deploys a webpage that can be visited at: _https://api.`PUBLIC_IP`.nip.io/**benchmarks**_, in order to inspect the Benchmarks
+- _metricsOn_: Activates/Deactivates the Benchmarking Capabilities of the System
+- _cliLog_: Prints the Benchmark's information at the _Backend API_'s terminal (Pod)
+- _pageLog_: Deploys a webpage that can be visited at: \*https://api.**PUBLIC_IP**.nip.io[:**HTTPS_PORT**]/**benchmarks***, in order to inspect the Benchmarks
 
 Please, take into account that making any changes to the configuration described above, will not have immediate effect on the System.
-The docker image of the *Backend API* needs to be rebuilt. The easiest way of achieving this is to execute:
+The docker image of the _Backend API_ needs to be rebuilt. The easiest way of achieving this is to execute:
 
 ```
-./initialize.sh project_images
-./initialize.sh project
+$ ./initialize.sh project_images
+$ ./initialize.sh project
 ```
- in order to rebuild the image and redeploy the System with the new configuration.
+
+in order to rebuild the image and redeploy the System with the new configuration.
 
 ## The requests are being executed slower than expected. What should I do?
 
 Maybe, your System is not powerful enough.
 Please, kindly check the question:
 
-> *The server seems that it can handle <i>more/less</i> Requests/Second. How to reduce/increase them?*
+> _The server seems that it can handle <i>more/less</i> Requests/Second. How to reduce/increase them?_
 
 that can be found at:
 

@@ -1,0 +1,10 @@
+{
+    "//PUBLIC_IP_comment": "PUBLIC_IP should only be changed if you need to define a custom PUBLIC IP - The Platform will automatically determine your Public IP",
+    "PUBLIC_IP": "XXX.XXX.XXX.XXX.nip.io",
+    "//PORTS_comment": [
+        "Customize the available HTTP/HTTPs ports - Don't forget to port forward if you're needed to, check your firewall and if you can't access the Application from the host machine",
+        "to inspect your NAT (i.e. NAT Reflection)"
+    ],
+    "HTTP_PORT": "8080",
+    "HTTPS_PORT": "6443"
+}

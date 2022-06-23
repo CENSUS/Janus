@@ -1,6 +1,6 @@
 {
-    "ca-attikon-hospital": "ca-attikon-hospital/APPEND_INFRASTRUCTURE_ENDPOINT/443",
-    "ca-general-hospital-of-athens": "ca-general-hospital-of-athens/APPEND_INFRASTRUCTURE_ENDPOINT/443",
-    "ca-medutils": "ca-medutils/APPEND_INFRASTRUCTURE_ENDPOINT/443",
-    "ca-healthprods": "ca-healthprods/APPEND_INFRASTRUCTURE_ENDPOINT/443"
+    "ca-attikon-hospital": "ca-attikon-hospital/APPEND_INFRASTRUCTURE_ENDPOINT/PORT",
+    "ca-general-hospital-of-athens": "ca-general-hospital-of-athens/APPEND_INFRASTRUCTURE_ENDPOINT/PORT",
+    "ca-medutils": "ca-medutils/APPEND_INFRASTRUCTURE_ENDPOINT/PORT",
+    "ca-healthprods": "ca-healthprods/APPEND_INFRASTRUCTURE_ENDPOINT/PORT"
 }

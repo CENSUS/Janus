@@ -59,6 +59,7 @@ function get_help() {
 }
 
 . scripts/init_values.sh
+. scripts/bootstrap_endpoints.sh
 . scripts/utils.sh
 . scripts/prereqs.sh
 . scripts/config.sh

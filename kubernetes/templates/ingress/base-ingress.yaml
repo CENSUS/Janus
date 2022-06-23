@@ -5,8 +5,8 @@ metadata:
   name: base-ingress-ssl-terminated
   annotations:
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
-
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/permanent-redirect: https://$host:{{ INFRASTRUCTURE_HTTPS_PORT }}$request_uri
 spec:
   ingressClassName: public
   rules:

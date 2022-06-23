@@ -9,9 +9,10 @@ DEP_DEBUG_LOGS="${ROOT_DIR}/debug_logs/dependencies"
 mkdir -p ${DEP_DEBUG_LOGS}
 
 LOG_FILE=${DEPENDENCIES_LOG_FILE:-${DEP_DEBUG_LOGS}/dependencies.log}
-DEBUG_FILE=${DEPENDENCIES_LOG_FILE:-${DEP_DEBUG_LOGS}/dependencies_debug.log}
+DEBUG_FILE=${DEPENDENCIES_LOG_FILE:-${DEP_DEBUG_LOGS}/dependencies-debug.log}
 
 . network/scripts/utils.sh
+. network/scripts/init_values.sh
 
 logging_init
 
@@ -159,9 +160,43 @@ function allow_ssl_termination() {
 
     push_fn "Allowing SSL termination"
 
+    is_ssl_terminated=$(kubectl -n ingress get daemonset nginx-ingress-microk8s-controller -o json | jq '.spec.template.spec.containers[0].args | map(. | contains ("--enable-ssl-passthrough")) | any')
+
+    if [ "${is_ssl_terminated}" = false ]; then
+        kubectl -n ingress patch daemonset nginx-ingress-microk8s-controller \
+            --type=json \
+            -p='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--enable-ssl-passthrough"}]'
+    else
+        push_fn "Already allowed"
+    fi
+
+    pop_fn
+
+}
+
+function set_infrastructure_ingress_port() {
+
+    log "Using Ports: [HTTP]: ${INFRASTRUCTURE_HTTP_PORT} - [HTTPS]: ${INFRASTRUCTURE_HTTPS_PORT}"
+
+    push_fn "Setting the Infrastructure's Ingress Ports [HTTP/HTTPS]"
+
+    http_port_index=$(kubectl -n ingress get daemonset nginx-ingress-microk8s-controller -o json | jq '.spec.template.spec.containers[0].ports | map(.name == "http") | index(true)')
+    https_port_index=$(kubectl -n ingress get daemonset nginx-ingress-microk8s-controller -o json | jq '.spec.template.spec.containers[0].ports | map(.name == "https") | index(true)')
+
     kubectl -n ingress patch daemonset nginx-ingress-microk8s-controller \
         --type=json \
-        -p='[{"op": "add", "path": "/spec/template/spec/containers/0/args/-", "value": "--enable-ssl-passthrough"}]'
+        -p='[{'op': 'replace', 'path': '/spec/template/spec/containers/0/ports/${http_port_index}', 'value': {
+            "containerPort": 80,
+            "hostPort": '${INFRASTRUCTURE_HTTP_PORT}',
+            "name": "http",
+            "protocol": "TCP"
+        }},
+        {'op': 'replace', 'path': '/spec/template/spec/containers/0/ports/${https_port_index}', 'value': {
+            "containerPort": 443,
+            "hostPort": '${INFRASTRUCTURE_HTTPS_PORT}',
+            "name": "https",
+            "protocol": "TCP"
+        }}]'
 
     pop_fn
 
@@ -185,6 +220,7 @@ if [ "${#}" -eq 1 ]; then
         create_vault_image
     elif [[ "${1}" == "configure" ]]; then
         allow_ssl_termination
+        set_infrastructure_ingress_port
     elif [[ "${1}" == "clear_build" ]]; then
         rm -rf dependencies_installation
     else
