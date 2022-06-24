@@ -38,7 +38,6 @@ platform as part of the "MELITY" national research project (ΜΕΛΙΤΥ,
 “Ανταγωνιστικότητα – Επιχειρηματικότητα – Καινοτομία”).
 
 ![MELITY LOGO](docs/images/melity-logo-with-text.png?raw=true "MELITY Logo")
-![EPANEK_LOGO](docs/images/epanek-logo.png?raw=true "EPANEK logo")
 
 The **Janus** platform is available for use under the 2-clause BSD license (see **LICENSE**).
 
