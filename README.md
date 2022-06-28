@@ -32,7 +32,7 @@ of the domain this was initiated upon. This extra blockchain also tracks
 membership-related information of the aforementioned ecosystem.
 
 CENSUS was tasked with the implementation of this
-platform as part of the "MELITY" national research project (ΜΕΛΙΤΥ,
+platform as part of the "MEΛΙΤΥ" national research project (ΜΕΛΙΤΥ,
 Κωδικός Έργου: Τ1ΕΔΚ-01958, Δράση “Ερευνώ – Δημιουργώ – Καινοτομώ”
 του Επιχειρησιακού Προγράμματος ΕΠΑνΕΚ 2014-2020
 “Ανταγωνιστικότητα – Επιχειρηματικότητα – Καινοτομία”).
